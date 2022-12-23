@@ -1,5 +1,5 @@
 package com.application.model;
 
 public enum RoomType {
-    STD, Suite, SuiteMini, Duplex
+    STD, SUITE, SUITE_MINI, DUPLEX
 }
