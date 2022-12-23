@@ -1,8 +1,8 @@
-package com.aplication.config;
+package com.application.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class AppDispatcherServletInitializer implements AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[0];
@@ -10,11 +10,11 @@ public class AppDispatcherServletInitializer implements AbstractAnnotationConfig
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[0];
+        return new Class[] { WebMvcConfig.class };
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[0];
+        return new String[] { "/" };
     }
 }

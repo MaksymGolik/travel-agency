@@ -1,4 +1,4 @@
-package com.aplication.model;
+package com.application.model;
 
 public enum Role {
     User, Manager
