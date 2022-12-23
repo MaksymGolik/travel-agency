@@ -17,7 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <spring.version>5.3.20</spring.version>
+    <spring.version>5.3.23</spring.version>
   </properties>
 
   <dependencies>
@@ -32,13 +32,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
       <version>${spring.version}</version>
     </dependency>
 
@@ -58,6 +51,12 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
       <version>${spring.version}</version>
     </dependency>
 
@@ -81,11 +80,10 @@
       <version>8.0.0.Final</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
     <dependency>
       <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-      <version>3.1.1.RELEASE</version>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>3.0.15.RELEASE</version>
     </dependency>
 
 
@@ -108,7 +106,12 @@
       <scope>provided</scope>
     </dependency>
 
-
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
 
   </dependencies>
 
