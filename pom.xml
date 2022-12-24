@@ -70,7 +70,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>6.1.6.Final</version>
+      <version>5.4.2.Final</version>
       <type>pom</type>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
@@ -111,6 +111,18 @@
       <artifactId>javax.servlet-api</artifactId>
       <version>4.0.1</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.197</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-dbcp</artifactId>
+      <version>9.0.1</version>
     </dependency>
 
   </dependencies>
