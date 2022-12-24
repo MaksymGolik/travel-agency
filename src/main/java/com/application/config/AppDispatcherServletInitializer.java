@@ -1,5 +1,6 @@
 package com.application.config;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -13,6 +14,7 @@ public class AppDispatcherServletInitializer extends AbstractAnnotationConfigDis
         return new Class[] { WebMvcConfig.class };
     }
 
+    @NotNull
     @Override
     protected String[] getServletMappings() {
         return new String[] { "/" };
