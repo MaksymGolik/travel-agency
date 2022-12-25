@@ -1,10 +1,11 @@
 package com.application.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
+import javax.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 
 @ToString
 @Getter
