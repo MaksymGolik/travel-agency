@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
 
     @Column(name = "number_of_room", nullable = false, unique = true)
@@ -43,8 +43,7 @@ public class Room {
     public Room() {
     }
 
-    public Room(Long id, int numberOfRoom, int peopleCapacity, double pricePerRoom, RoomType roomType, Hotel hotel) {
-        this.id = id;
+    public Room( int numberOfRoom, int peopleCapacity, double pricePerRoom, RoomType roomType, Hotel hotel) {
         this.numberOfRoom = numberOfRoom;
         this.peopleCapacity = peopleCapacity;
         this.pricePerRoom = pricePerRoom;

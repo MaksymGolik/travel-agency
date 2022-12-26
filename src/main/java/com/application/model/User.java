@@ -46,18 +46,7 @@ public class User {
     private String phoneNumber;
 
 
-
-
-    public User(long id, String email, String password, Role role) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-
-    }
-
-    public User(long id, Role role, String firstName, String lastName, String email, String password, String phoneNumber) {
-        this.id = id;
+    public User( Role role, String firstName, String lastName, String email, String password, String phoneNumber) {
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;

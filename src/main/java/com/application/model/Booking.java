@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
 
 
@@ -40,8 +40,7 @@ public class Booking {
     private Room room;
 
 
-    public Booking(Long id, LocalDateTime dateIn, LocalDateTime dateOut, double totalPrice, User user, Room room) {
-        this.id = id;
+    public Booking(LocalDateTime dateIn, LocalDateTime dateOut, double totalPrice, User user, Room room) {
         this.dateIn = dateIn;
         this.dateOut = dateOut;
         this.totalPrice = totalPrice;

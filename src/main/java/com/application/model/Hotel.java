@@ -29,8 +29,7 @@ public class Hotel {
     public Hotel() {
     }
 
-    public Hotel(long id, String name, int starRating, Country country) {
-        this.id = id;
+    public Hotel(String name, int starRating, Country country) {
         this.name = name;
         this.starRating = starRating;
         this.country = country;
