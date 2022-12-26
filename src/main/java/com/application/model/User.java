@@ -17,6 +17,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @JoinColumn(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @Pattern(regexp = "[A-Z][a-z]+",
             message = "Must start with a capital letter followed by one or more lowercase letters")
@@ -42,9 +46,6 @@ public class User {
     private String phoneNumber;
 
 
-    @JoinColumn(name = "role")
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
 
     public User(long id, String email, String password, Role role) {
@@ -52,8 +53,18 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
+
     }
 
+    public User(long id, Role role, String firstName, String lastName, String email, String password, String phoneNumber) {
+        this.id = id;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
 
     public User() {
 

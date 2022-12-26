@@ -12,10 +12,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
+@Table(name = "rooms")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
 
 
