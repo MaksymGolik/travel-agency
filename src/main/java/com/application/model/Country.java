@@ -1,6 +1,6 @@
 package com.application.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
