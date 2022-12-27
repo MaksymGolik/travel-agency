@@ -1,19 +1,19 @@
 package com.application.service;
 
-import com.application.dto.UserRequest;
+import com.application.dto.UserCreateRequest;
 import com.application.dto.UserResponse;
 import com.application.model.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface IUserService {
     User create(User user);
-    boolean saveUser(UserRequest userRequest);
+    boolean saveUser(UserCreateRequest userCreateRequest);
     User readById(long id);
     User readByEmail(String email);
     User update(User user);
     void delete(long id);
     List<User> getAll();
-    UserResponse findByLoginAndPassword(UserRequest userRequest);
-    boolean matchPassword(UserRequest userRequest);
+    UserResponse findByLoginAndPassword(UserCreateRequest userCreateRequest);
+    boolean matchPassword(UserCreateRequest userCreateRequest);
 }

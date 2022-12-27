@@ -10,10 +10,19 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @Data
 
-public class UserRequest {
+public class UserCreateRequest {
     @NotEmpty
-    private String login;
+    private String email;
 
     @NotEmpty
     private String password;
+
+    @NotEmpty
+    private String firstName;
+
+    @NotEmpty
+    private String lastName;
+
+    @NotEmpty
+    private String phoneNumber;
 }
