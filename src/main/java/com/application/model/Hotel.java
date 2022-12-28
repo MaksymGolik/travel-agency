@@ -27,6 +27,7 @@ public class Hotel {
     private Country country;
 
     public Hotel() {
+
     }
 
     public Hotel(String name, int starRating, Country country) {
