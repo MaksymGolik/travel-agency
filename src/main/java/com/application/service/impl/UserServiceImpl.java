@@ -3,11 +3,15 @@ package com.application.service.impl;
 import com.application.dao.IUserDAO;
 import com.application.dto.UserCreateRequest;
 import com.application.dto.UserResponse;
+import com.application.dto.mapper.UserCreateRequestMapper;
 import com.application.exception.EntityNotFoundException;
+import com.application.model.Role;
 import com.application.model.User;
 import com.application.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
@@ -22,27 +26,24 @@ import java.util.Optional;
 @Slf4j
 public class UserServiceImpl implements IUserService {
     private IUserDAO userDAO;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(IUserDAO userDAO){
+    public UserServiceImpl(@Qualifier("userDAOImpl") IUserDAO userDAO, PasswordEncoder passwordEncoder){
         this.userDAO = userDAO;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    //private PasswordEncoder passwordEncoder;
     @Override
-    public User create(User user) {
-        String email = user.getEmail();
+    public void saveUser(UserCreateRequest userCreateRequest) {
+        String email = userCreateRequest.getEmail();
         if(userDAO.findUserByEmail(email).isPresent())
             throw new KeyAlreadyExistsException("User with this email is already exists");
+        System.out.println(UserCreateRequestMapper.mapToModel(userCreateRequest));
+        User user = UserCreateRequestMapper.mapToModel(userCreateRequest);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         userDAO.addUser(user);
-        return userDAO.findUserByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException("User with email " + email + " not found"));
-    }
-
-    @Override
-    public boolean saveUser(UserCreateRequest userCreateRequest) {
-
-        return false;
     }
 
     @Override

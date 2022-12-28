@@ -2,9 +2,8 @@ package com.application.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 
 
 @ToString
@@ -23,7 +22,7 @@ public class User {
 
 
     @Pattern(regexp = "[A-Z][a-z]+",
-            message = "Must start with a capital letter followed by one or more lowercase letters")
+           message = "Must start with a capital letter followed by one or more lowercase letters")
     @Column(name = "first_name" , nullable = false)
     private String firstName;
 
@@ -45,7 +44,7 @@ public class User {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-
+    @Builder
     public User( Role role, String firstName, String lastName, String email, String password, String phoneNumber) {
         this.role = role;
         this.firstName = firstName;

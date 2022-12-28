@@ -7,8 +7,7 @@ import com.application.model.User;
 import java.util.List;
 
 public interface IUserService {
-    User create(User user);
-    boolean saveUser(UserCreateRequest userCreateRequest);
+    void saveUser(UserCreateRequest userCreateRequest);
     User readById(long id);
     User readByEmail(String email);
     User update(User user);
