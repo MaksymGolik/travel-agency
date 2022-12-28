@@ -21,7 +21,7 @@ public class ServerErrorHandler {
         log.error("Message: {}, url: {}", e.getMessage(), httpServletRequest.getRequestURL());
         Map<String, String> modelMessage = new HashMap<>();
         modelMessage.put("error", e.getMessage());
-        ModelAndView modelAndView = new ModelAndView("500page",modelMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+        ModelAndView modelAndView = new ModelAndView("500-page",modelMessage, HttpStatus.INTERNAL_SERVER_ERROR);
 
         return modelAndView;
     }
