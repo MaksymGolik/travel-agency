@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+@Repository("userDAOImpl")
 public class UserDAOImpl implements IUserDAO {
 
     private final SessionFactory sessionFactory;
@@ -22,7 +22,7 @@ public class UserDAOImpl implements IUserDAO {
     @Override
     public Optional<User> findUserByEmail(String email) {
         try(Session session = sessionFactory.openSession()){
-            return session.createQuery("select u from users where u.email=:email",User.class)
+            return session.createQuery("select u from User u where u.email=:email",User.class)
                     .setParameter("email", email).getResultStream().findFirst();
 
         }
@@ -31,7 +31,7 @@ public class UserDAOImpl implements IUserDAO {
     @Override
     public Optional<User> findUserById(long id) {
         try(Session session = sessionFactory.openSession()){
-            return session.createQuery("select u from users where u.id=:id",User.class)
+            return session.createQuery("select u from User u where u.id=:id",User.class)
                     .setParameter("id", id).getResultStream().findFirst();
 
         }
