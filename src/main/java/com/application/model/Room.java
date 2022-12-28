@@ -3,9 +3,7 @@ package com.application.model;
 
 import javax.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 
 @ToString
@@ -13,6 +11,9 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "rooms")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,17 +39,4 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
-
-
-    public Room() {
-    }
-
-    public Room( int numberOfRoom, int peopleCapacity, double pricePerRoom, RoomType roomType, Hotel hotel) {
-        this.numberOfRoom = numberOfRoom;
-        this.peopleCapacity = peopleCapacity;
-        this.pricePerRoom = pricePerRoom;
-        this.roomType = roomType;
-        this.hotel = hotel;
-    }
-
 }

@@ -1,15 +1,13 @@
 package com.application.dao.implementation;
 
-import com.application.dao.RoomDAO;
+import com.application.dao.IRoomDAO;
 import com.application.model.Room;
-import com.application.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.util.List;
 import java.util.Optional;
 
-public class RoomDAOImpl implements RoomDAO {
+public class RoomDAOImpl implements IRoomDAO {
 
     private final SessionFactory sessionFactory;
 
