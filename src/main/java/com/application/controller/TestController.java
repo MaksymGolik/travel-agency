@@ -14,7 +14,7 @@ public class TestController {
 
     @GetMapping("/test")
     public String test(){
-        userService.saveUser(new UserCreateRequest("ivan123@gmail.com","123qwerty","Ivan","Ivanow","+38099554"));
+        userService.saveUser(new UserCreateRequest("ivan123@gmail.com","123qwerty","Ivan","Ivanow","+380995547456"));
         return "home_page";
     }
 
