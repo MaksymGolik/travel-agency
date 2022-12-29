@@ -12,7 +12,6 @@ public class RoomCreateRequestMapper {
                 .peopleCapacity(roomCreateRequest.getPeopleCapacity())
                 .pricePerRoom(roomCreateRequest.getPricePerRoom())
                 .roomType(roomCreateRequest.getRoomType())
-                .hotel(roomCreateRequest.getHotel())
                 .build();
 
     }

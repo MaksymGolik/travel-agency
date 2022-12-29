@@ -30,13 +30,10 @@ public class RoomServiceImpl implements IRoomService {
 
 
     @Override
-    public void saveRoom(RoomCreateRequest roomCreateRequest) {
-        int numberOfRoom = roomCreateRequest.getNumberOfRoom();
+    public void saveRoom(Room room) {
+        int numberOfRoom = room.getNumberOfRoom();
         if (roomDAO.findRoomByNumberOfRoom(numberOfRoom).isPresent())
             throw new KeyAlreadyExistsException("Room with this number is already exists");
-        System.out.println(RoomCreateRequestMapper.mapToModel(roomCreateRequest));
-        Room room = RoomCreateRequestMapper.mapToModel(roomCreateRequest);
-
         roomDAO.addRoomToTheHotel(room);
     }
 
@@ -52,7 +49,7 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public Room readRoomById(long id) {
+    public Room readById(long id) {
         Optional<Room> room = roomDAO.findRoomById(id);
         if (room.isEmpty()) {
             log.warn("IN readRoomById - no room found by id: {}", id);
