@@ -44,12 +44,13 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/test").permitAll()
+                        .antMatchers("/users/test","/users/create","/resources/**","/jquery/**","/popper/**","/bootstrap/**")
+                        .permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/test")
+                        .loginPage("/users/login")
+                        .defaultSuccessUrl("/users/home")
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());
