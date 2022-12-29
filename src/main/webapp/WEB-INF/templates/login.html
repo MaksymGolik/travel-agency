@@ -1,19 +1,45 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title>Spring Security Example </title>
+
+    <meta charset="UTF-8">
+
+    <title>Login</title>
+
+    <!-- See configuration in WebMvConfig.java -->
+    <link rel="stylesheet" th:href="@{/resources/css/auth.css}">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+    <script th:src="@{/jquery/jquery.min.js}"></script>
+    <script th:src="@{/popper/popper.min.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
 </head>
-<body>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+
+<body class="text-center">
+<form class="form-signin" method="POST" id="login" th:action="@{/users/login}">
+
+    <img class="mb-4" src="https://ps.w.org/login-customizer/assets/icon-256x256.png?rev=2455454" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+    <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+    <div class="text-center">
+        <p>Not a member? <a href="/users/create">Register</a></p>
+    </div>
+
+    <div class="alert alert-danger text-center" th:if="${param.error}">
+        Invalid username and password.
+    </div>
+
+    <div class="alert alert-success text-center" th:if="${param.logout}">
+        You have been logged out.
+    </div>
+
+    <p class="mt-5 mb-3 text-muted">© Travel-Agency-2022</p>
 </form>
 </body>
 </html>
