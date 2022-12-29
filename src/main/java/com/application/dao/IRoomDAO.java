@@ -14,8 +14,4 @@ public interface IRoomDAO {
     void addRoomToTheHotel (Room room);
     void delete (Room room);
     void update (Room room);
-
-
-
-
 }

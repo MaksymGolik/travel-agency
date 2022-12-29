@@ -45,4 +45,21 @@ public class UserDAOImpl implements IUserDAO {
             session.getTransaction().commit();
         }
     }
+
+    @Override
+    public void update(User user) {
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            session.update(user);
+            session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public void delete(User user) {
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            session.delete(user);
+        }
+    }
 }

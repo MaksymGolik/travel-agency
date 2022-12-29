@@ -1,22 +1,15 @@
 package com.application.service.impl;
 
 import com.application.dao.IUserDAO;
-import com.application.dto.UserCreateRequest;
-import com.application.dto.UserResponse;
-import com.application.dto.mapper.UserCreateRequestMapper;
 import com.application.exception.EntityNotFoundException;
-import com.application.model.Role;
 import com.application.model.User;
 import com.application.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -26,23 +19,17 @@ import java.util.Optional;
 @Slf4j
 public class UserServiceImpl implements IUserService {
     private IUserDAO userDAO;
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(@Qualifier("userDAOImpl") IUserDAO userDAO, PasswordEncoder passwordEncoder){
+    public UserServiceImpl(@Qualifier("userDAOImpl") IUserDAO userDAO){
         this.userDAO = userDAO;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public void saveUser(UserCreateRequest userCreateRequest) {
-        String email = userCreateRequest.getEmail();
+    public void saveUser(User user) {
+        String email = user.getEmail();
         if(userDAO.findUserByEmail(email).isPresent())
             throw new KeyAlreadyExistsException("User with this email is already exists");
-        System.out.println(UserCreateRequestMapper.mapToModel(userCreateRequest));
-        User user = UserCreateRequestMapper.mapToModel(userCreateRequest);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.USER);
         userDAO.addUser(user);
     }
 
@@ -69,32 +56,17 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User update(User user) {
-//        User oldUser = readById(user.getId());
-//        return userRepository.save(user);
-        return new User();
+    public void update(User user) {
+        long id = user.getId();
+        if(userDAO.findUserById(id).isEmpty())
+            throw new EntityNotFoundException("User with id "+ id + " not found");
+        userDAO.update(user);
     }
 
     @Override
     public void delete(long id) {
-//        User user = readById(id);
-//        userRepository.delete(user);
-    }
-
-    @Override
-    public List<User> getAll() {
-//        List<User> users = userRepository.findAll();
-//        return users.isEmpty() ? new ArrayList<>() : users;
-        return new ArrayList<>();
-    }
-
-    @Override
-    public UserResponse findByLoginAndPassword(UserCreateRequest userCreateRequest) {
-        return null;
-    }
-
-    @Override
-    public boolean matchPassword(UserCreateRequest userCreateRequest) {
-        return false;
+        User user = userDAO.findUserById(id).orElseThrow(()->
+                        new EntityNotFoundException("User with id "+ id + " not found"));
+        userDAO.delete(user);
     }
 }
