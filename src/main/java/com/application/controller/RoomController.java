@@ -33,7 +33,7 @@ public class RoomController {
         this.hotelService = hotelService;
     }
 
-    @PreAuthorize(value = "hasAuthority('MANEGER')")
+    @PreAuthorize(value = "hasAuthority('MANAGER')")
     @GetMapping(value = "/create")
     public ModelAndView addRoom(@PathVariable(value = "hotel_id") long hotelId){
         ModelAndView mv = new ModelAndView();
@@ -45,7 +45,7 @@ public class RoomController {
         return mv;
     }
 
-    @PreAuthorize(value = "hasAuthority('MANEGER')")
+    @PreAuthorize(value = "hasAuthority('MANAGER')")
     @PostMapping(value = "/create")
     public String addRoom( @PathVariable(value = "hotel_id") long hotelId, RoomCreateRequest roomCreateRequest ){
 
@@ -59,7 +59,7 @@ public class RoomController {
 
 
     @DeleteMapping("/{room_id}")
-    @PreAuthorize("hasAuthority('MANEGER')")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public String delete(@PathVariable(value = "room_id") long roomId, @PathVariable String hotel_id) {
         roomService.delete(roomId);
         return "redirect:/hotel_page";
