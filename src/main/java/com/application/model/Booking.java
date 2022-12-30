@@ -37,16 +37,18 @@ public class Booking {
     private User user;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name="room_id")
-    private List<Room> room;
+    @JoinTable(name = "booking_rooms",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id"))
+    private List<Room> rooms;
 
 
-    public Booking(LocalDateTime dateIn, LocalDateTime dateOut, double totalPrice, User user, List<Room> room) {
+    public Booking(LocalDateTime dateIn, LocalDateTime dateOut, double totalPrice, User user, List<Room> rooms) {
         this.dateIn = dateIn;
         this.dateOut = dateOut;
         this.totalPrice = totalPrice;
         this.user = user;
-        this.room = room;
+        this.rooms = rooms;
     }
 
 
