@@ -60,6 +60,7 @@ public class UserDAOImpl implements IUserDAO {
         try(Session session = sessionFactory.openSession()){
             session.beginTransaction();
             session.delete(user);
+            session.getTransaction().commit();
         }
     }
 }
