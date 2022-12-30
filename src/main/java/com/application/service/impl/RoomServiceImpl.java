@@ -5,6 +5,7 @@ import com.application.dto.RoomCreateRequest;
 import com.application.dto.mapper.RoomCreateRequestMapper;
 import com.application.exception.EntityNotFoundException;
 import com.application.model.Room;
+import com.application.model.User;
 import com.application.service.IRoomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class RoomServiceImpl implements IRoomService {
     public Room readByNumberOfRoom(int numberOfRoom) {
         Optional<Room> room = roomDAO.findRoomById(numberOfRoom);
         if (room.isEmpty()) {
-            log.warn("IN readByNumberOfRoom - no room found by id: {}", numberOfRoom);
+            log.warn("IN readByNumberOfRoom - no room found by number: {}", numberOfRoom);
             throw new EntityNotFoundException("Room with number " + numberOfRoom + " not found");
         }
         log.info("IN readByNumberOfRoom - room: {} found by number: {}", room.get(), numberOfRoom);
@@ -60,13 +61,18 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public Room update(Room user) {
-        return null;
+    public void update(Room room) {
+        long id = room.getId();
+        if(roomDAO.findRoomById(id).isEmpty())
+            throw new EntityNotFoundException("Room with id "+ id + " not found");
+        roomDAO.update(room);
     }
 
     @Override
     public void delete(long id) {
-
+        Room room = roomDAO.findRoomById(id).orElseThrow(()->
+                new EntityNotFoundException("Room with id "+ id + " not found"));
+        roomDAO.delete(room);
     }
 
     @Override

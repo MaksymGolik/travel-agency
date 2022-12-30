@@ -9,7 +9,7 @@ public interface IRoomService {
     Room readByNumberOfRoom (int id);
     Room readById(long id);
 
-    Room update(Room user);
+    void update(Room room);
     void delete(long id);
     List<Room> getAll();
 
