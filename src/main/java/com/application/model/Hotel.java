@@ -2,10 +2,7 @@ package com.application.model;
 
 import javax.persistence.*;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 
 @Data
@@ -30,6 +27,8 @@ public class Hotel {
 
     }
 
+
+    @Builder
     public Hotel(String name, int starRating, Country country) {
         this.name = name;
         this.starRating = starRating;
