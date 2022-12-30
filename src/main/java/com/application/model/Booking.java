@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @ToString
@@ -35,12 +36,12 @@ public class Booking {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private Room room;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="room_id")
+    private List<Room> room;
 
 
-    public Booking(LocalDateTime dateIn, LocalDateTime dateOut, double totalPrice, User user, Room room) {
+    public Booking(LocalDateTime dateIn, LocalDateTime dateOut, double totalPrice, User user, List<Room> room) {
         this.dateIn = dateIn;
         this.dateOut = dateOut;
         this.totalPrice = totalPrice;
