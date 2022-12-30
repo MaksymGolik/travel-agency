@@ -1,14 +1,14 @@
 package com.application.model;
 
 import javax.persistence.*;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 
-@ToString
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "hotels")
 public class Hotel {
