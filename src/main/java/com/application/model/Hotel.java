@@ -1,14 +1,11 @@
 package com.application.model;
 
 import javax.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 
 
-@ToString
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "hotels")
 public class Hotel {
@@ -30,6 +27,8 @@ public class Hotel {
 
     }
 
+
+    @Builder
     public Hotel(String name, int starRating, Country country) {
         this.name = name;
         this.starRating = starRating;

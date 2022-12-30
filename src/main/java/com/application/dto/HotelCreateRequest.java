@@ -1,32 +1,20 @@
 package com.application.dto;
-
-
-import com.application.model.RoomType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RoomCreateRequest {
+public class HotelCreateRequest {
 
 
     @NotEmpty
-    private int numberOfRoom;
+    private String name;
 
     @NotEmpty
-    private int peopleCapacity;
-
-
-    @NotEmpty
-    private double pricePerRoom;
-
-
-    @NotEmpty
-    private RoomType roomType;
-
-
+    private int starRating;
 }
