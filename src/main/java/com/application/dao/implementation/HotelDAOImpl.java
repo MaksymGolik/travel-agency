@@ -22,7 +22,7 @@ public class HotelDAOImpl implements IHotelDAO {
     @Override
     public Optional<Hotel> findHotelByName(String name) {
         try(Session session = sessionFactory.openSession()){
-            return session.createQuery("select r from Hotel r where r.name=:name", Hotel.class)
+            return session.createQuery("select h from Hotel h where h.name=:name", Hotel.class)
                     .setParameter("name", name).getResultStream().findFirst();
 
         }
@@ -31,7 +31,7 @@ public class HotelDAOImpl implements IHotelDAO {
     @Override
     public Optional<Hotel> findHotelById(long id) {
         try(Session session = sessionFactory.openSession()){
-            return session.createQuery("select r from Room r where r.id=:id", Hotel.class)
+            return session.createQuery("select h from Hotel h where h.id=:id", Hotel.class)
                     .setParameter("id", id).getResultStream().findFirst();
 
         }
