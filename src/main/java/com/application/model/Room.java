@@ -29,7 +29,7 @@ public class Room {
     private double pricePerRoom;
 
 
-    @JoinColumn(name = "room_type")
+    @Column(name = "room_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
 
