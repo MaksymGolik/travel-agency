@@ -33,7 +33,7 @@ public class RoomController {
         this.hotelService = hotelService;
     }
 
-    @PreAuthorize(value = "hasAuthority('MANAGER')")
+  //  @PreAuthorize(value = "hasAuthority('MANAGER')")
     @GetMapping(value = "/create")
     public ModelAndView addRoom(@PathVariable(value = "hotel_id") long hotelId){
         ModelAndView mv = new ModelAndView();
@@ -45,7 +45,7 @@ public class RoomController {
         return mv;
     }
 
-    @PreAuthorize(value = "hasAuthority('MANAGER')")
+    // @PreAuthorize(value = "hasAuthority('MANAGER')")
     @PostMapping(value = "/create")
     public String addRoom( @PathVariable(value = "hotel_id") long hotelId, RoomCreateRequest roomCreateRequest ){
 

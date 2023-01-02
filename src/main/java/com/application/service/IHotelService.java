@@ -1,7 +1,6 @@
 package com.application.service;
 
 import com.application.model.Hotel;
-
 import java.util.List;
 
 
@@ -16,7 +15,7 @@ public interface IHotelService {
 
 
 
-    void update(Hotel user);
+    void update(Hotel hotel);
 
     void delete(long id);
 

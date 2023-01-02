@@ -1,11 +1,8 @@
 package com.application.service.impl;
 
 import com.application.dao.IRoomDAO;
-import com.application.dto.RoomCreateRequest;
-import com.application.dto.mapper.RoomCreateRequestMapper;
 import com.application.exception.EntityNotFoundException;
 import com.application.model.Room;
-import com.application.model.User;
 import com.application.service.IRoomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
