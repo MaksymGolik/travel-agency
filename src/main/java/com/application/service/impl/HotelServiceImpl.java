@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -28,48 +30,49 @@ public class HotelServiceImpl implements IHotelService {
 
     @Override
     public void saveHotel(Hotel hotel) {
-        String name = hotel.getName();
-        if (hotelDAO.findHotelByName(name).isPresent())
-            throw new KeyAlreadyExistsException("Hotel with this name is already exists");
+        long id = hotel.getId();
+        if (hotelDAO.findHotelById(id).isPresent())
+            throw new KeyAlreadyExistsException("Hotel with this id is already exists");
         hotelDAO.createHotel(hotel);
     }
 
 
     @Override
     public Hotel readById(long id) {
-       Optional<Hotel> hotel = hotelDAO.findHotelById(id);
+        Optional<Hotel> hotel = hotelDAO.findHotelById(id);
         if (hotel.isEmpty()) {
             log.warn("IN readById - no hotel found by id: {}", id);
             throw new EntityNotFoundException("Hotel with id " + id + " not found");
         }
-        log.info("IN readById - hotel: {} found by number: {}", hotel.get(), id);
+        log.info("IN readById - hotel: {} found by id: {}", hotel.get(), id);
         return hotel.get();
     }
 
     @Override
-    public Hotel readByName(String name) {
-        Optional<Hotel> hotel = hotelDAO.findHotelByName(name);
-        if (hotel.isEmpty()) {
+    public List<Hotel> readByName(String name) {
+        List<Hotel> hotels = hotelDAO.findHotelByName(name);
+        if (hotels.isEmpty()) {
             log.warn("IN readByName - no hotel found by name: {}", name);
             throw new EntityNotFoundException("Hotel with name " + name + " not found");
         }
-        log.info("IN readByName - room: {} found by number: {}", hotel.get(), name);
-        return hotel.get();
+        log.info("IN readByName - hotels: {} found by name: {}", hotels, name);
+        return hotels;
     }
+
 
     @Override
     public void update(Hotel hotel) {
         long id = hotel.getId();
-        if(hotelDAO.findHotelById(id).isEmpty())
-            throw new EntityNotFoundException("Hotel with id "+ id + " not found");
+        if (hotelDAO.findHotelById(id).isEmpty())
+            throw new EntityNotFoundException("Hotel with id " + id + " not found");
         hotelDAO.update(hotel);
     }
 
 
     @Override
     public void delete(long id) {
-        Hotel hotel = hotelDAO.findHotelById(id).orElseThrow(()->
-                new EntityNotFoundException("Hotel with id "+ id + " not found"));
+        Hotel hotel = hotelDAO.findHotelById(id).orElseThrow(() ->
+                new EntityNotFoundException("Hotel with id " + id + " not found"));
         hotelDAO.delete(hotel);
     }
 }

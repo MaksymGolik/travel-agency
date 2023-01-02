@@ -20,18 +20,6 @@ public class RoomDAOImpl implements IRoomDAO {
     }
 
 
-
-
-    @Override
-    public Optional<Room> findRoomByNumberOfRoom(int numberOfRoom) {
-        try(Session session = sessionFactory.openSession()){
-            return session.createQuery("select r from Room r where r.numberOfRoom=:numberOfRoom", Room.class)
-                    .setParameter("numberOfRoom", numberOfRoom).getResultStream().findFirst();
-
-        }
-
-    }
-
     @Override
     public Optional<Room> findRoomById(long id) {
         try(Session session = sessionFactory.openSession()){

@@ -7,7 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository ("hotelDAOImpl")
 public class HotelDAOImpl implements IHotelDAO {
@@ -20,11 +22,10 @@ public class HotelDAOImpl implements IHotelDAO {
 
 
     @Override
-    public Optional<Hotel> findHotelByName(String name) {
+    public List<Hotel> findHotelByName(String name) {
         try(Session session = sessionFactory.openSession()){
             return session.createQuery("select h from Hotel h where h.name=:name", Hotel.class)
-                    .setParameter("name", name).getResultStream().findFirst();
-
+                    .setParameter("name", name).getResultStream().collect(Collectors.toList());
         }
     }
 

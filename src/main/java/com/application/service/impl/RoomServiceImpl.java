@@ -32,22 +32,12 @@ public class RoomServiceImpl implements IRoomService {
 
     @Override
     public void saveRoom(Room room) {
-        int numberOfRoom = room.getNumberOfRoom();
-        if (roomDAO.findRoomByNumberOfRoom(numberOfRoom).isPresent())
-            throw new KeyAlreadyExistsException("Room with this number is already exists");
+        long numberOfRoom = room.getId();
+        if (roomDAO.findRoomById(numberOfRoom).isPresent())
+            throw new KeyAlreadyExistsException("Room with this id is already exists");
         roomDAO.addRoomToTheHotel(room);
     }
 
-    @Override
-    public Room readByNumberOfRoom(int numberOfRoom) {
-        Optional<Room> room = roomDAO.findRoomById(numberOfRoom);
-        if (room.isEmpty()) {
-            log.warn("IN readByNumberOfRoom - no room found by number: {}", numberOfRoom);
-            throw new EntityNotFoundException("Room with number " + numberOfRoom + " not found");
-        }
-        log.info("IN readByNumberOfRoom - room: {} found by number: {}", room.get(), numberOfRoom);
-        return room.get();
-    }
 
     @Override
     public Room readById(long id) {

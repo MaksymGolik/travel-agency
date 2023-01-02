@@ -1,17 +1,24 @@
 package com.application.service;
 
 import com.application.model.Hotel;
-import com.application.model.Room;
+
+import java.util.List;
 
 
 public interface IHotelService {
 
 
-    void saveHotel (Hotel hotel);
+    void saveHotel(Hotel hotel);
+
     Hotel readById(long id);
-    Hotel readByName(String name);
+
+    List<Hotel> readByName(String name);
+
+
+
     void update(Hotel user);
-    void delete (long id);
+
+    void delete(long id);
 
 
 }
