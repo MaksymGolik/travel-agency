@@ -2,11 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title> Create New Hotel </title>
 </head>
 <body>
+<div class="col-md-offset-2">
+    <h2>Create New Hotel</h2>
+</div>
+<form class="form-horizontal" th:action="@{/hotels/create}" th:object="${hotel}" method="post">
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="name">Name:</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" th:field="*{name}" id="name"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}"></small>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="star-rating">Star Rating:</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" th:field="*{starRating}" id="star-rating"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('starRating')}"
+                   th:errors="*{starRating}"></small>
+        </div>
+    </div>
 
-<h2>Create New Hotel</h2>
+     <div>
+        <input type="submit" class="btn btn-info" value="Create"/>
+        <input type="reset" class="btn btn" value="Clear"/>
+    </div>
+</form>
 
 </body>
 </html>
