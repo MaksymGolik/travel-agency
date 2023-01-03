@@ -50,17 +50,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-        // Access Bootstrap static resource:
-        registry.addResourceHandler("/jquery/**") //
-                .addResourceLocations("classpath:/META-INF/resources/webjars/jquery/3.6.0/");
-
-        registry.addResourceHandler("/popper/**") //
-                .addResourceLocations("classpath:/META-INF/resources/webjars/popper.js/2.9.3/umd/");
-
-        registry.addResourceHandler("/bootstrap/**") //
-                .addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/5.1.3/");
-
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 }
