@@ -1,0 +1,16 @@
+.form-control {
+    float: right;
+    width: 200px;
+}
+
+button.btn.btn-info.btn-lg {
+    margin-right: 20px;
+}
+
+.reg {
+    color:white;
+}
+
+.clr {
+    color:black;
+}
