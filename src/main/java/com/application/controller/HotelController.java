@@ -2,9 +2,7 @@ package com.application.controller;
 
 
 import com.application.dto.HotelCreateRequest;
-import com.application.dto.UserCreateRequest;
 import com.application.dto.mapper.HotelCreateRequestMapper;
-import com.application.dto.mapper.UserCreateRequestMapper;
 import com.application.model.Hotel;
 import com.application.service.ICountryService;
 import com.application.service.IHotelService;
@@ -14,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/hotels")
@@ -61,8 +58,10 @@ public class HotelController {
         if (result.hasErrors()) {
             return "create-hotel";
         }
-       // hotel.setPassword(passwordEncoder.encode(user.getPassword()));
-        hotelService.saveHotel(HotelCreateRequestMapper.mapToModel(hotel));
+        Hotel hotel1 = HotelCreateRequestMapper.mapToModel(hotel);
+        hotel1.setCountry(countryService.readByName(hotel.getCountry()));
+
+        hotelService.saveHotel(hotel1);
         return "hotel_page";
 
     }
