@@ -9,6 +9,7 @@ public class HotelCreateRequestMapper {
         return Hotel.builder()
                 .name(hotelCreateRequest.getName())
                 .starRating(hotelCreateRequest.getStarRating())
+                .country(hotelCreateRequest.getCountry())
                 .build();
     }
 

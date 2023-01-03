@@ -27,6 +27,16 @@
         </div>
     </div>
 
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="country">Country:</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" th:field="*{country}" id="country"/>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('country')}"
+                   th:errors="*{country}"></small>
+        </div>
+    </div>
+
      <div>
         <input type="submit" class="btn btn-info" value="Create"/>
         <input type="reset" class="btn btn" value="Clear"/>
