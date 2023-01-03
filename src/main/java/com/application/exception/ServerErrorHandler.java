@@ -18,6 +18,7 @@ public class ServerErrorHandler {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handler(Exception e, HttpServletRequest httpServletRequest) {
+        System.out.println("Problem" + e.getMessage());
         log.error("Message: {}, url: {}", e.getMessage(), httpServletRequest.getRequestURL());
         Map<String, String> modelMessage = new HashMap<>();
         modelMessage.put("error", e.getMessage());
