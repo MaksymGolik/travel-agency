@@ -1,7 +1,7 @@
 
-INSERT INTO users (id,  first_name, last_name, email, password, phone_number, role) VALUES (1, 'Nick', 'Green', 'nick@mail.com', '$2a$04$/5OH4XrS8m2JOgRCIaFMwOoy4eFW6cgCNSRyLOvDD/6hLYHHDNJiG', +380559488336,'USER');
-INSERT INTO users (id,  first_name, last_name, email, password, phone_number, role) VALUES (2, 'Nora', 'White', 'nora@mail.com', '$2a$10$yYQaJrHzjOgD5wWCyelp0e1Yv1KEKeqUlYfLZQ1OQvyUrnEcX/rOy', +380589488336, 'MANAGER');
-INSERT INTO users (id,  first_name, last_name, email, password, phone_number, role) VALUES (3, 'Mike', 'Brown', 'mike@mail.com', '$2a$04$fuyCLq/wrTKA2olt4Eugy.LxWvXsMc7mrd6F5YvCeGApcdp3XQeOC',+380599488336, 'USER');
+INSERT INTO users (id,  first_name, last_name, email, password, phone_number, role) VALUES (7, 'Nick', 'Green', 'nick@mail.com', '$2a$04$/5OH4XrS8m2JOgRCIaFMwOoy4eFW6cgCNSRyLOvDD/6hLYHHDNJiG', +380559488336,'USER');
+INSERT INTO users (id,  first_name, last_name, email, password, phone_number, role) VALUES (8, 'Nora', 'White', 'nora@mail.com', '$2a$10$yYQaJrHzjOgD5wWCyelp0e1Yv1KEKeqUlYfLZQ1OQvyUrnEcX/rOy', +380589488336, 'MANAGER');
+INSERT INTO users (id,  first_name, last_name, email, password, phone_number, role) VALUES (9, 'Mike', 'Brown', 'mike@mail.com', '$2a$04$fuyCLq/wrTKA2olt4Eugy.LxWvXsMc7mrd6F5YvCeGApcdp3XQeOC',+380599488336, 'USER');
 
 
 INSERT INTO countries (id, name) VALUES (1, 'Great Britain');
