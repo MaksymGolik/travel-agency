@@ -7,7 +7,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository("userDAOImpl")
 public class UserDAOImpl implements IUserDAO {
@@ -61,6 +63,14 @@ public class UserDAOImpl implements IUserDAO {
             session.beginTransaction();
             session.delete(user);
             session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public List<User> findAll() {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select u from User u", User.class)
+                    .getResultStream().collect(Collectors.toList());
         }
     }
 }

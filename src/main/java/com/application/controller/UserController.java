@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users")
@@ -55,6 +56,12 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(UserCreateRequestMapper.mapToModel(user));
         return "redirect:/users/login";
+    }
 
+    @GetMapping("/all")
+    public String all(Model model){
+        model.addAttribute("users", userService.readAll().stream()
+                .map(UserResponseMapper::mapToDto).collect(Collectors.toList()));
+        return "users-list";
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -68,5 +69,10 @@ public class UserServiceImpl implements IUserService {
         User user = userDAO.findUserById(id).orElseThrow(()->
                         new EntityNotFoundException("User with id "+ id + " not found"));
         userDAO.delete(user);
+    }
+
+    @Override
+    public List<User> readAll() {
+        return userDAO.findAll();
     }
 }

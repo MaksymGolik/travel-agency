@@ -2,6 +2,7 @@ package com.application.dao;
 
 import com.application.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IUserDAO {
@@ -11,4 +12,5 @@ public interface IUserDAO {
 
     void update(User user);
     void delete(User user);
+    List<User> findAll();
 }
