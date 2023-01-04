@@ -4,11 +4,8 @@ import com.application.dto.UserCreateRequest;
 import com.application.dto.UserResponse;
 import com.application.dto.mapper.UserCreateRequestMapper;
 import com.application.dto.mapper.UserResponseMapper;
-import com.application.security.UserDetailsImpl;
 import com.application.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +54,7 @@ public class UserController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(UserCreateRequestMapper.mapToModel(user));
-        return "home_page";
+        return "redirect:/users/login";
 
     }
 }
