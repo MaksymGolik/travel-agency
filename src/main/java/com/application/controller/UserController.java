@@ -6,6 +6,7 @@ import com.application.dto.mapper.UserCreateRequestMapper;
 import com.application.dto.mapper.UserResponseMapper;
 import com.application.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,7 @@ public class UserController {
     public String home(Principal principal, Model model){
         UserResponse userResponse = UserResponseMapper.mapToDto(userService.readByEmail(principal.getName()));
         model.addAttribute("userResponse", userResponse);
-        return "home_page";
+        return "user-info";
     }
 
     @GetMapping("/create")
@@ -63,5 +64,12 @@ public class UserController {
         model.addAttribute("users", userService.readAll().stream()
                 .map(UserResponseMapper::mapToDto).collect(Collectors.toList()));
         return "users-list";
+    }
+
+    @PreAuthorize("hasAuthority('MANAGER')")
+    @GetMapping("/profile/{id}")
+    public String profile(@PathVariable long id, Model model){
+        model.addAttribute(UserResponseMapper.mapToDto(userService.readById(id)));
+        return "user-info";
     }
 }
