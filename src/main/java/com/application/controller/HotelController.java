@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/hotels")
 public class HotelController {
@@ -27,22 +29,64 @@ public class HotelController {
         this.countryService = countryService;
     }
 
+    @GetMapping("/all")
+    public String getAll() {
 
- /*   @GetMapping(value = "/create")
-    public ModelAndView create(@PathVariable(value = "country_id") long countryId) {
-        ModelAndView mv = new ModelAndView();
-        Hotel hotel = new Hotel();
-        mv.setViewName("create_hotel");
-        hotel.setCountry(countryService.readById(countryId));
-        mv.getModel().put("hotel", hotel);
-        return mv;
-    }*/
+        return "hotels-list";
+    }
+
 
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("hotel", new HotelCreateRequest());
         return "create-hotel";
     }
+
+    @PostMapping("/create")
+    public String create(@Validated @ModelAttribute("hotel") HotelCreateRequest hotelCreateRequest, BindingResult result) {
+        if (result.hasErrors()) {
+            return "create-hotel";
+        }
+        Hotel hotel = HotelCreateRequestMapper.mapToModel(hotelCreateRequest);
+        hotel.setCountry(countryService.readByName(hotelCreateRequest.getCountry()));
+
+        hotelService.saveHotel(hotel);
+        return "hotel_page";
+
+    }
+
+    @GetMapping("/{hotel_id}/update")
+    public String update(Model model,
+                         @PathVariable(name = "hotel_id") long hotelId) {
+
+        model.addAttribute("hotel", hotelService.readById(hotelId));
+        return "update-hotel";
+    }
+
+
+    @PostMapping("/{hotel_id}/update")
+    public String update(@Valid @ModelAttribute("hotel") Hotel hotel,
+                         @PathVariable(name = "hotel_id") long hotelId)
+    {
+        Hotel oldHotel = hotelService.readById(hotelId);
+        oldHotel.setName(hotel.getName());
+        oldHotel.setStarRating(hotel.getStarRating());
+       hotelService.update(oldHotel);
+
+        return "redirect:/hotels/all";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*@PostMapping(value = "/create")
     public String create(@PathVariable(value = "country_id") long countryId, HotelCreateRequest hotelCreateRequest) {
@@ -53,18 +97,15 @@ public class HotelController {
         return "home_page";
     }*/
 
-    @PostMapping("/create")
-    public String create(@Validated @ModelAttribute("hotel") HotelCreateRequest hotel, BindingResult result) {
-        if (result.hasErrors()) {
-            return "create-hotel";
-        }
-        Hotel hotel1 = HotelCreateRequestMapper.mapToModel(hotel);
-        hotel1.setCountry(countryService.readByName(hotel.getCountry()));
 
-        hotelService.saveHotel(hotel1);
-        return "hotel_page";
-
-    }
-
+    /*   @GetMapping(value = "/create")
+    public ModelAndView create(@PathVariable(value = "country_id") long countryId) {
+        ModelAndView mv = new ModelAndView();
+        Hotel hotel = new Hotel();
+        mv.setViewName("create_hotel");
+        hotel.setCountry(countryService.readById(countryId));
+        mv.getModel().put("hotel", hotel);
+        return mv;
+    }*/
 
 }
