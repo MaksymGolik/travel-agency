@@ -1,5 +1,6 @@
 package com.application.config;
 
+import com.application.exception.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @EnableWebSecurity
 @Configuration
@@ -41,6 +43,11 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return new CustomAccessDeniedHandler();
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
@@ -50,11 +57,22 @@ public class WebSecurityConfig {
                 )
                 .formLogin((form) -> form
                         .loginPage("/users/login")
-                        .defaultSuccessUrl("/users/home")
+                        .permitAll()
+                        .defaultSuccessUrl("/users/home",true)
+
+                )
+                .logout((logout) -> logout
+                        .logoutSuccessUrl("/users/login")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll());
+                .exceptionHandling((handling)->handling
+                        .accessDeniedHandler(accessDeniedHandler()));
 
         return http.build();
     }
+
+
 }
