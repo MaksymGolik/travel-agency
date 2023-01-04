@@ -1,6 +1,8 @@
 package com.application.service;
 
 import com.application.model.Hotel;
+
+
 import java.util.List;
 
 
@@ -13,11 +15,11 @@ public interface IHotelService {
 
     List<Hotel> readByName(String name);
 
-
-
     void update(Hotel hotel);
 
     void delete(long id);
+
+    List<Hotel> readAll();
 
 
 }

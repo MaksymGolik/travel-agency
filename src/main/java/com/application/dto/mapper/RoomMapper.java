@@ -1,10 +1,11 @@
 package com.application.dto.mapper;
 
 import com.application.dto.RoomCreateRequest;
+import com.application.dto.RoomResponse;
 import com.application.model.Room;
 
 
-public class RoomCreateRequestMapper {
+public class RoomMapper {
 
     public static Room mapToModel(RoomCreateRequest roomCreateRequest){
         return Room.builder()
@@ -15,6 +16,19 @@ public class RoomCreateRequestMapper {
                 .build();
 
     }
+
+
+    public static RoomResponse mapToDto(Room room){
+        return RoomResponse.builder()
+                .id(room.getId())
+                .numberOfRoom(room.getNumberOfRoom())
+                .pricePerRoom(room.getPricePerRoom())
+                .peopleCapacity(room.getPeopleCapacity())
+                .roomType(room.getRoomType())
+                .build();
+    }
+
+
 
 
 }

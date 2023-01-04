@@ -3,6 +3,7 @@ package com.application.dao.implementation;
 
 import com.application.dao.IHotelDAO;
 import com.application.model.Hotel;
+import com.application.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -62,6 +63,14 @@ public class HotelDAOImpl implements IHotelDAO {
             session.beginTransaction();
             session.update(hotel);
             session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public List<Hotel> findAll() {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select h from Hotel h", Hotel.class)
+                    .getResultStream().collect(Collectors.toList());
         }
     }
 }

@@ -9,9 +9,12 @@ public interface IHotelDAO {
     List<Hotel> findHotelByName(String name);
 
     Optional<Hotel> findHotelById(long id);
+
     void createHotel (Hotel hotel);
     void delete (Hotel hotel);
     void update (Hotel hotel);
+
+    List<Hotel> findAll();
 
 
 }

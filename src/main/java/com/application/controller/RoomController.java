@@ -1,18 +1,15 @@
 package com.application.controller;
 
 import com.application.dto.RoomCreateRequest;
-import com.application.dto.mapper.RoomCreateRequestMapper;
+import com.application.dto.mapper.RoomMapper;
 import com.application.model.Room;
 import com.application.service.IHotelService;
 import com.application.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.validation.Valid;
 
 
 @Controller
@@ -49,7 +46,7 @@ public class RoomController {
     @PostMapping(value = "/create")
     public String addRoom( @PathVariable(value = "hotel_id") long hotelId, RoomCreateRequest roomCreateRequest ){
 
-        Room room = RoomCreateRequestMapper.mapToModel(roomCreateRequest);
+        Room room = RoomMapper.mapToModel(roomCreateRequest);
         room.setHotel(hotelService.readById(hotelId));
         roomService.saveRoom(room);
 

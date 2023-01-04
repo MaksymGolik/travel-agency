@@ -2,16 +2,17 @@ package com.application.dto.mapper;
 
 import com.application.dao.ICountryDAO;
 import com.application.dto.HotelCreateRequest;
+import com.application.dto.HotelResponse;
 import com.application.model.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class HotelCreateRequestMapper {
+public class HotelMapper {
 
 
     ICountryDAO iCountryDAO;
 
     @Autowired
-    public HotelCreateRequestMapper(ICountryDAO iCountryDAO) {
+    public HotelMapper(ICountryDAO iCountryDAO) {
         this.iCountryDAO = iCountryDAO;
     }
 
@@ -19,6 +20,15 @@ public class HotelCreateRequestMapper {
         return Hotel.builder()
                 .name(hotelCreateRequest.getName())
                 .starRating(hotelCreateRequest.getStarRating())
+                .build();
+    }
+
+    public static HotelResponse mapToDto(Hotel hotel){
+        return HotelResponse.builder()
+                .id(hotel.getId())
+                .name(hotel.getName())
+                .starRating(hotel.getStarRating())
+                .country(hotel.getCountry())
                 .build();
     }
 

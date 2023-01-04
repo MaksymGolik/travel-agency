@@ -74,4 +74,9 @@ public class HotelServiceImpl implements IHotelService {
                 new EntityNotFoundException("Hotel with id " + id + " not found"));
         hotelDAO.delete(hotel);
     }
+
+    @Override
+    public List<Hotel> readAll() {
+        return hotelDAO.findAll();
+    }
 }

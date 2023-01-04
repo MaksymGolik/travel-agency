@@ -2,6 +2,8 @@ package com.application.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,6 +27,7 @@ public class Country {
     public Country() {
     }
 
+    @Builder
     public Country (String name) {
         this.name = name;
     }

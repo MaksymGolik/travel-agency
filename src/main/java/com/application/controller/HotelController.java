@@ -2,7 +2,7 @@ package com.application.controller;
 
 
 import com.application.dto.HotelCreateRequest;
-import com.application.dto.mapper.HotelCreateRequestMapper;
+import com.application.dto.mapper.HotelMapper;
 import com.application.model.Hotel;
 import com.application.service.ICountryService;
 import com.application.service.IHotelService;
@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/hotels")
@@ -30,8 +31,10 @@ public class HotelController {
     }
 
     @GetMapping("/all")
-    public String getAll() {
+    public String getAll(Model model) {
 
+            model.addAttribute("hotels", hotelService.readAll().stream()
+                    .map(HotelMapper::mapToDto).collect(Collectors.toList()));
         return "hotels-list";
     }
 
@@ -47,7 +50,7 @@ public class HotelController {
         if (result.hasErrors()) {
             return "create-hotel";
         }
-        Hotel hotel = HotelCreateRequestMapper.mapToModel(hotelCreateRequest);
+        Hotel hotel = HotelMapper.mapToModel(hotelCreateRequest);
         hotel.setCountry(countryService.readByName(hotelCreateRequest.getCountry()));
 
         hotelService.saveHotel(hotel);
