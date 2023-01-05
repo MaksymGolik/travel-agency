@@ -12,6 +12,12 @@
                     <li sec:authorize="hasAuthority('MANAGER')">
                         <a class="nav-link active" aria-current="page" th:href="@{/users/all}">Users</a>
                     </li>
+                    <li sec:authorize="hasAuthority('MANAGER')">
+                        <a class="nav-link active" aria-current="page" href="#">New Country</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('MANAGER')">
+                        <a class="nav-link active" aria-current="page" th:href="@{/hotels/create}">New Hotel</a>
+                    </li>
                 </ul>
             </div>
         </div>

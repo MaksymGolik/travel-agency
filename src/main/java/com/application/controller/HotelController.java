@@ -41,6 +41,7 @@ public class HotelController {
 
     @GetMapping("/create")
     public String create(Model model) {
+        model.addAttribute("countries", countryService.readAll());
         model.addAttribute("hotel", new HotelCreateRequest());
         return "create-hotel";
     }
