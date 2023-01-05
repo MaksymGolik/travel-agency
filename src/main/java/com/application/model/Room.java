@@ -40,6 +40,8 @@ public class Room {
 
 
 
+
+
     @Builder
     public Room(int numberOfRoom, int peopleCapacity, double pricePerRoom, RoomType roomType, Hotel hotel) {
         this.numberOfRoom = numberOfRoom;

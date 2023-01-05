@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +21,7 @@ public class BookingService implements IBookingService {
     IBookingDAO bookingDAO;
 
     @Autowired
-    public BookingService(IBookingDAO bookingDAO){
+    public BookingService(IBookingDAO bookingDAO) {
         this.bookingDAO = bookingDAO;
     }
 
@@ -47,15 +49,33 @@ public class BookingService implements IBookingService {
     @Override
     public void update(Booking booking) {
         long id = booking.getId();
-        if(bookingDAO.findBookingById(id).isEmpty())
-            throw new EntityNotFoundException("Booking with id "+ id + " not found");
+        if (bookingDAO.findBookingById(id).isEmpty())
+            throw new EntityNotFoundException("Booking with id " + id + " not found");
         bookingDAO.update(booking);
     }
 
     @Override
     public void delete(long id) {
-        Booking booking = bookingDAO.findBookingById(id).orElseThrow(()->
-                new EntityNotFoundException("Booking with id "+ id + " not found"));
+        Booking booking = bookingDAO.findBookingById(id).orElseThrow(() ->
+                new EntityNotFoundException("Booking with id " + id + " not found"));
         bookingDAO.delete(booking);
+    }
+
+    @Override
+    public boolean checkIfAvailableDate(LocalDateTime dateIn, LocalDateTime dateOut) {
+        if (dateOut.isBefore(dateIn)) {
+            throw new DateTimeException("The date of check_out is later than the date of check_in");
+        }
+        List<Booking> bookingList = bookingDAO.findAll();
+        for (Booking booking : bookingList) {
+            if (booking.getDateIn().isBefore(dateIn) && booking.getDateOut().isAfter(dateIn)
+                    || booking.getDateIn().isBefore(dateOut) && booking.getDateOut().isAfter(dateOut)
+                    || booking.getDateIn().isAfter(dateIn) && booking.getDateOut().isBefore(dateOut)
+                    || booking.getDateIn().isBefore(dateIn) && booking.getDateOut().isAfter(dateOut)
+            )
+                return false;
+        }
+
+        return true;
     }
 }

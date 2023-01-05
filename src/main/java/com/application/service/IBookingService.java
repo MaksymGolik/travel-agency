@@ -2,6 +2,7 @@ package com.application.service;
 
 import com.application.model.Booking;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IBookingService {
@@ -10,4 +11,7 @@ public interface IBookingService {
     void saveBooking(Booking booking);
     void update(Booking booking);
     void delete(long id);
+
+    boolean checkIfAvailableDate(LocalDateTime dateIn, LocalDateTime dateOut );
+
 }

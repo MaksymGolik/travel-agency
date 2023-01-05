@@ -2,6 +2,7 @@ package com.application.dao.implementation;
 
 import com.application.dao.IBookingDAO;
 import com.application.model.Booking;
+import com.application.model.Room;
 import com.application.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,6 +39,15 @@ public class BookingDAOImpl implements IBookingDAO {
                     .setParameter("id", id).getResultStream().collect(Collectors.toList());
         }
     }
+
+    @Override
+    public List<Booking> findAll() {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select b from Booking b", Booking.class)
+                    .getResultStream().collect(Collectors.toList());
+        }
+    }
+
 
     @Override
     public void addBooking(Booking booking) {
