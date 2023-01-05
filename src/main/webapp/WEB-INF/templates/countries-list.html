@@ -14,25 +14,24 @@
 <th:block th:include="header"/>
 <div class="container centered mt-5">
 
-    <h1> List of all Hotels in system </h1>
+    <h1>List of Countries </h1>
     <table class="table table-hover text-center">
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Star Rating </th>
-            <th> Country </th>
-            <th colspan="2">Operations</th>
+            <th> Operations</th>
         </tr>
-        <tr th:each="hotel : ${hotels}">
+        <tr th:each="country : ${countries}">
 
-            <td th:text="${hotel.getId()}"/>
-            <td th:text="${hotel.getName()}"></td>
-            <td th:text="${hotel.getStarRating()}"/>
-            <td th:text="${hotel.getCountry().getName()}"/>
-            <td><a th:href="@{/hotels/{id}/update(id=${hotel.getId()})}">Profile</a></td>
-            <td><a th:href="@{/hotels/{id}/update(id=${hotel.getId()})}">Bookings</a></td>
+            <td th:text="${country.getId()}"/>
+            <td th:text="${country.getName()}"></td>
+            <td><a th:href="@{/countries/all/hotels/{country_id}(country_id=${country.getId()})}">All Hotels in  <span th:text="|${country.getName()}|"/></a></td>
         </tr>
     </table>
+
+</div>
+<div class="container centered mt-5">
+<a th:href="@{/hotels/all}">See all Hotels in system  </a>
 </div>
 </body>
 </html>

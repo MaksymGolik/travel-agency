@@ -1,8 +1,8 @@
 package com.application.dao;
 
 import com.application.model.Country;
-import com.application.model.Hotel;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ICountryDAO {
@@ -13,4 +13,6 @@ public interface ICountryDAO {
     void createCountry (Country country);
     void delete (Country country);
     void update (Country country);
+
+    List<Country> findAll();
 }

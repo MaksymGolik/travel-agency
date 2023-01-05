@@ -14,7 +14,7 @@
 <th:block th:include="header"/>
 <div class="container centered mt-5">
 
-    <h1> List of all Hotels in system </h1>
+    <h1> List of all Hotels in <span th:text="|${country.getName()}|"/> </h1>
     <table class="table table-hover text-center">
         <tr>
             <th>Id</th>

@@ -8,7 +8,6 @@ import com.application.model.Country;
 public class CountryMapper {
 
 
-
     public static Country mapToModel(CountryCreateRequest countryCreateRequest){
         return Country.builder()
                 .name(countryCreateRequest.getName())

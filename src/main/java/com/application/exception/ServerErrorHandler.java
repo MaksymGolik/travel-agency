@@ -23,7 +23,7 @@ public class ServerErrorHandler {
         Map<String, String> modelMessage = new HashMap<>();
         modelMessage.put("error", e.getMessage());
         ModelAndView modelAndView = new ModelAndView("500-page",modelMessage, HttpStatus.INTERNAL_SERVER_ERROR);
-        System.out.println("Something wrong  ");
+
         return modelAndView;
     }
 }

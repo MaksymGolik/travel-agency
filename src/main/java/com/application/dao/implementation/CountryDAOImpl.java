@@ -6,8 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 
 
 @Repository("countryDAOImpl")
@@ -59,6 +60,14 @@ public class CountryDAOImpl implements ICountryDAO {
             session.beginTransaction();
             session.update(country);
             session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public List<Country> findAll() {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select c from Country c", Country.class)
+                    .getResultStream().collect(Collectors.toList());
         }
     }
 }

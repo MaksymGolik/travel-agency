@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class HotelMapper {
 
 
-    ICountryDAO iCountryDAO;
+  /*  ICountryDAO iCountryDAO;
 
     @Autowired
     public HotelMapper(ICountryDAO iCountryDAO) {
         this.iCountryDAO = iCountryDAO;
-    }
+    }*/
 
     public static Hotel mapToModel(HotelCreateRequest hotelCreateRequest){
         return Hotel.builder()

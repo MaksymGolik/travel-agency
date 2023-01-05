@@ -16,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/hotels/{hotel_id}/rooms")
 public class RoomController {
 
-
-
     IRoomService roomService;
 
     IHotelService hotelService;

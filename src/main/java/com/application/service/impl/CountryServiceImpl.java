@@ -1,14 +1,18 @@
 package com.application.service.impl;
 
 import com.application.dao.ICountryDAO;
+import com.application.dao.IHotelDAO;
 import com.application.exception.EntityNotFoundException;
 import com.application.model.Country;
+import com.application.model.Hotel;
 import com.application.service.ICountryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import javax.management.openmbean.KeyAlreadyExistsException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,9 +20,12 @@ import java.util.Optional;
 public class CountryServiceImpl implements ICountryService {
     private ICountryDAO countryDAO;
 
+    private IHotelDAO hotelDAO;
+
     @Autowired
-    public CountryServiceImpl(@Qualifier("countryDAOImpl") ICountryDAO countryDAO) {
+    public CountryServiceImpl(@Qualifier("countryDAOImpl") ICountryDAO countryDAO, IHotelDAO hotelDAO) {
         this.countryDAO = countryDAO;
+        this.hotelDAO = hotelDAO;
     }
 
 
@@ -66,4 +73,23 @@ public class CountryServiceImpl implements ICountryService {
                 new EntityNotFoundException("Country with id " + id + " not found"));
         countryDAO.delete(country);
     }
+
+    @Override
+    public List<Country> readAll() {
+        return countryDAO.findAll();
+    }
+
+    @Override
+    public List<Hotel> readAllHotelsInCountry(long id) {
+       List<Hotel> hotelList = hotelDAO.findAll();
+       List<Hotel> listOfHotelsInCountry = new ArrayList<>();
+       for (Hotel hotel : hotelList) {
+           if ( hotel.getCountry().getId() == id ) {
+               listOfHotelsInCountry.add(hotel);
+           }
+       }
+        return listOfHotelsInCountry;
+    }
+
+
 }
