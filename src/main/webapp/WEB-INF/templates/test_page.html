@@ -16,6 +16,7 @@
 </head>
 <body>
 <th:block th:include="header"/>
+<th:block sec:authorize="hasAuthority('MANAGER')" th:include="manager-header"/>
 Hello. Access for this page allowed for everyone.
 </body>
 </html>

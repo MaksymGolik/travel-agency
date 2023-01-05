@@ -12,8 +12,11 @@
                     <li sec:authorize="isAnonymous()" class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
                     </li>
-                    <li sec:authorize="hasAuthority('MANAGER')">
-                        <a class="nav-link active" aria-current="page" th:href="@{/users/all}">Users</a>
+                    <li sec:authorize="isAuthenticated()">
+                        <a class="nav-link active" aria-current="page" th:href="@{/countries/all}">Countries</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a class="nav-link active" aria-current="page" th:href="@{/hotels/all}">Hotels</a>
                     </li>
                 </ul>
                 <form sec:authorize="isAuthenticated()" class="d-flex" th:action="@{/logout}" method="post">

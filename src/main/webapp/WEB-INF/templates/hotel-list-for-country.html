@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Hotels List</title>
@@ -12,6 +14,7 @@
 </head>
 <body>
 <th:block th:include="header"/>
+<th:block sec:authorize="hasAuthority('MANAGER')" th:include="manager-header"/>
 <div class="container centered mt-5">
 
     <h1> List of all Hotels in <span th:text="|${country.getName()}|"/> </h1>
