@@ -31,9 +31,9 @@ public class CountryServiceImpl implements ICountryService {
 
     @Override
     public void saveCountry(Country country) {
-        long id = country.getId();
-        if (countryDAO.findCountryById(id).isPresent())
-            throw new KeyAlreadyExistsException("Country with this id is already exists");
+        String name = country.getName();
+        if (countryDAO.findCountryByName(name).isPresent())
+            throw new KeyAlreadyExistsException("Country with name "+name+" is already exists");
         countryDAO.createCountry(country);
     }
 
