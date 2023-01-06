@@ -3,7 +3,6 @@ package com.application.service.impl;
 import com.application.dao.IBookingDAO;
 import com.application.exception.EntityNotFoundException;
 import com.application.model.Booking;
-import com.application.model.User;
 import com.application.service.IBookingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,9 @@ public class BookingService implements IBookingService {
             )
                 return false;
         }
-
         return true;
     }
+
+
+
 }
