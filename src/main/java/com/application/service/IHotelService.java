@@ -13,7 +13,7 @@ public interface IHotelService {
 
     Hotel readById(long id);
 
-    List<Hotel> readByName(String name);
+    Hotel readByName(String name);
 
     void update(Hotel hotel);
 

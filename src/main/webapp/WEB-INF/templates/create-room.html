@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Room</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/resources/css/info.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js" integrity="sha512-XLo6bQe08irJObCc86rFEKQdcFYbGGIHVXcfMsxpbvF8ompmd1SNJjqVY5hmjQ01Ts0UmmSQGfqpt3fGjm6pGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0b505032f6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<th:block th:include="header"/>
+<th:block sec:authorize="hasAuthority('MANAGER')" th:include="manager-header"/>
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create New Hotel</p>
+
+                                <form class="mx-1 mx-md-4" th:method="POST" th:action="@{/rooms/create}" th:object="${room}">
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-home-lg-alt "></i>
+                                        <label class="form-label" for="number-of-room">Number of room</label>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" th:field="*{numberOfRoom}" id="number-of-room" class="form-control" />
+                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('numberOfRoom')}"
+                                                   th:errors="*{numberOfRoom}"></small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa-solid fa-people-pants-simple"></i>
+                                        <label class="form-label" for="people-capacity"> People capacity </label>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" th:field="*{peopleCapacity}" id="people-capacity" class="form-control" />
+                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('peopleCapacity')}"
+                                                   th:errors="*{peopleCapacity}"></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa-regular fa-badge-dollar"></i>
+                                        <label class="form-label" for="price-per-room"> Price per room for one night </label>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" th:field="*{pricePerRoom}" id="price-per-room" class="form-control" />
+                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('pricePerRoom')}"
+                                                   th:errors="*{pricePerRoom}"></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa-solid fa-diamond"></i>
+                                        <label class="form-label" for="room-type"> Type of room</label>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <select for="priority" class="form-control" th:field="${room.roomType}" id="room-type">
+                                                <option th:each="roomType : ${T(com.application.model.RoomType).values()}"
+                                                        th:value="${roomType}" th:text="${roomType}"></option>
+                                            </select>
+                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('rooomType')}"
+                                                   th:errors="*{roomType}"></small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-flag fa-lg me-3 fa-fw"></i>
+                                        <label class="form-label" for="hotel">Hotel</label>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <select name="hotel" id="hotel" class="form-control">
+                                                <option th:each="hotel : ${hotels}"
+                                                        th:value="${hotel.getName()}"
+                                                        th:text="${hotel.getName()}">
+                                                    Options
+                                                </option>
+                                            </select>
+                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('hotel')}"
+                                                   th:errors="*{hotel}"></small>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="submit" class="btn btn-info btn-lg reg">Create</button>
+                                        <button type="reset" class="btn btn-secondary btn-lg clr">Clear</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

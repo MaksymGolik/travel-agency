@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 @AllArgsConstructor
@@ -14,19 +15,25 @@ import javax.validation.constraints.NotEmpty;
 public class RoomCreateRequest {
 
 
-    @NotEmpty
+    //@NotNull
     private int numberOfRoom;
 
-    @NotEmpty
+  //  @NotNull
     private int peopleCapacity;
 
 
-    @NotEmpty
+   // @NotNull
     private double pricePerRoom;
 
 
-    @NotEmpty
+   // @NotEmpty
     private RoomType roomType;
+
+
+    @NotEmpty
+    private String hotel;
+
+
 
 
 }

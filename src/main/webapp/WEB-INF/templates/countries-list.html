@@ -25,7 +25,6 @@
             <th> Operations</th>
         </tr>
         <tr th:each="country : ${countries}">
-
             <td th:text="${country.getId()}"/>
             <td th:text="${country.getName()}"></td>
             <td><a th:href="@{/countries/all/hotels/{country_id}(country_id=${country.getId()})}">All Hotels in  <span th:text="|${country.getName()}|"/></a></td>

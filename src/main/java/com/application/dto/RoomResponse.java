@@ -1,5 +1,6 @@
 package com.application.dto;
 
+import com.application.model.Hotel;
 import com.application.model.RoomType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,4 +26,6 @@ public class RoomResponse {
     private double pricePerRoom;
 
     private RoomType roomType;
+
+    private Hotel hotel;
 }

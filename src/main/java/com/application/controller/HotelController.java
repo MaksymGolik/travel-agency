@@ -7,6 +7,7 @@ import com.application.model.Hotel;
 import com.application.service.ICountryService;
 import com.application.service.IHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,7 +48,8 @@ public class HotelController {
     }
 
     @PostMapping("/create")
-    public String create(@Validated @ModelAttribute("hotel") HotelCreateRequest hotelCreateRequest, BindingResult result) {
+    public String create(@Validated @ModelAttribute("hotel") HotelCreateRequest hotelCreateRequest,
+                         BindingResult result) {
         if (result.hasErrors()) {
             return "create-hotel";
         }
@@ -55,7 +57,7 @@ public class HotelController {
         hotel.setCountry(countryService.readByName(hotelCreateRequest.getCountry()));
 
         hotelService.saveHotel(hotel);
-        return "hotel_page";
+        return "hotel-page";
 
     }
 
@@ -79,6 +81,17 @@ public class HotelController {
 
         return "redirect:/hotels/all";
     }
+
+    @DeleteMapping("/{hotel_id}")
+    @PreAuthorize("hasAuthority('MANAGER')")
+    public String delete(@PathVariable(value = "hotel_id") long hotelId, @PathVariable String hotel_id) {
+        hotelService.delete(hotelId);
+        return "hotel-page";
+    }
+
+
+
+
 
 
 

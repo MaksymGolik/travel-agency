@@ -48,14 +48,14 @@ public class HotelServiceImpl implements IHotelService {
     }
 
     @Override
-    public List<Hotel> readByName(String name) {
-        List<Hotel> hotels = hotelDAO.findHotelByName(name);
-        if (hotels.isEmpty()) {
+    public Hotel readByName(String name) {
+        Optional<Hotel> hotel= hotelDAO.findHotelByName(name);
+        if (hotel.isEmpty()) {
             log.warn("IN readByName - no hotel found by name: {}", name);
             throw new EntityNotFoundException("Hotel with name " + name + " not found");
         }
-        log.info("IN readByName - hotels: {} found by name: {}", hotels, name);
-        return hotels;
+        log.info("IN readByName - hotels: {} found by name: {}", hotel, name);
+        return hotel.get();
     }
 
 

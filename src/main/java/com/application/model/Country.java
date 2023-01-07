@@ -28,7 +28,8 @@ public class Country {
     }
 
     @Builder
-    public Country (String name) {
+    public Country (long id, String name) {
+        this.id = id;
         this.name = name;
     }
 }

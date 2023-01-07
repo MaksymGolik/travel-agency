@@ -25,6 +25,7 @@ public class RoomMapper {
                 .pricePerRoom(room.getPricePerRoom())
                 .peopleCapacity(room.getPeopleCapacity())
                 .roomType(room.getRoomType())
+                .hotel(room.getHotel())
                 .build();
     }
 

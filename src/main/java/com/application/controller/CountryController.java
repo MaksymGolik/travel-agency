@@ -58,6 +58,6 @@ public class CountryController {
         }
         Country country = CountryMapper.mapToModel(countryCreateRequest);
         countryService.saveCountry(country);
-        return "redirect:/countries-list";
+        return "redirect:/countries/all";
     }
 }

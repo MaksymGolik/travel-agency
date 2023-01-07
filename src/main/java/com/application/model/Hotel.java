@@ -29,7 +29,8 @@ public class Hotel {
 
 
     @Builder
-    public Hotel(String name, int starRating, Country country) {
+    public Hotel(long id, String name, int starRating, Country country) {
+        this.id = id;
         this.name = name;
         this.starRating = starRating;
         this.country = country;
