@@ -29,6 +29,27 @@
 
                                 <form class="mx-1 mx-md-4" th:method="POST" th:action="@{/rooms/create}" th:object="${room}">
 
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="submit" class="btn btn-info btn-lg reg">Create</button>
+                                        <button type="reset" class="btn btn-secondary btn-lg clr">Clear</button>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-flag fa-lg me-3 fa-fw"></i>
+                                        <label class="form-label" for="hotels">Hotel</label>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <select name="hotel" id="hotels" class="form-control">
+                                                <option th:each="hotel : ${hotels}"
+                                                        th:value="${hotel.getName()}"
+                                                        th:text="${hotel.getName()}">
+                                                    Options
+                                                </option>
+                                            </select>
+                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('hotel')}"
+                                                   th:errors="*{hotel}"></small>
+                                        </div>
+                                    </div>
+
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-home-lg-alt "></i>
                                         <label class="form-label" for="number-of-room">Number of room</label>
@@ -39,7 +60,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fa-solid fa-people-pants-simple"></i>
+                                        <ion-icon name="people-outline"></ion-icon>
                                         <label class="form-label" for="people-capacity"> People capacity </label>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="text" th:field="*{peopleCapacity}" id="people-capacity" class="form-control" />
@@ -49,7 +70,7 @@
                                     </div>
 
                                     <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fa-regular fa-badge-dollar"></i>
+                                        <ion-icon name="cash-outline"></ion-icon>
                                         <label class="form-label" for="price-per-room"> Price per room for one night </label>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="text" th:field="*{pricePerRoom}" id="price-per-room" class="form-control" />
@@ -62,7 +83,7 @@
                                         <i class="fa-solid fa-diamond"></i>
                                         <label class="form-label" for="room-type"> Type of room</label>
                                         <div class="form-outline flex-fill mb-0">
-                                            <select for="priority" class="form-control" th:field="${room.roomType}" id="room-type">
+                                            <select for="roomType" class="form-control" th:field="${room.roomType}" id="room-type">
                                                 <option th:each="roomType : ${T(com.application.model.RoomType).values()}"
                                                         th:value="${roomType}" th:text="${roomType}"></option>
                                             </select>
@@ -70,28 +91,7 @@
                                                    th:errors="*{roomType}"></small>
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-flag fa-lg me-3 fa-fw"></i>
-                                        <label class="form-label" for="hotel">Hotel</label>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <select name="hotel" id="hotel" class="form-control">
-                                                <option th:each="hotel : ${hotels}"
-                                                        th:value="${hotel.getName()}"
-                                                        th:text="${hotel.getName()}">
-                                                    Options
-                                                </option>
-                                            </select>
-                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('hotel')}"
-                                                   th:errors="*{hotel}"></small>
-                                        </div>
-                                    </div>
 
-
-
-                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="submit" class="btn btn-info btn-lg reg">Create</button>
-                                        <button type="reset" class="btn btn-secondary btn-lg clr">Clear</button>
-                                    </div>
                                 </form>
                             </div>
                         </div>
