@@ -18,6 +18,9 @@
                     <li sec:authorize="isAuthenticated()">
                         <a class="nav-link active" aria-current="page" th:href="@{/hotels/all}">Hotels</a>
                     </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a class="nav-link active" aria-current="page" th:href="@{/rooms/search_available}">Search rooms for booking</a>
+                    </li>
                 </ul>
                 <form sec:authorize="isAuthenticated()" class="d-flex" th:action="@{/logout}" method="post">
                     <ul class="navbar-nav ms-auto">

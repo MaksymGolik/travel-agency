@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import javax.management.openmbean.KeyAlreadyExistsException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,5 +66,10 @@ public class RoomServiceImpl implements IRoomService {
     @Override
     public List<Room> readAll() {
         return roomDAO.findAll();
+    }
+
+    @Override
+    public List<Room> findAvailableByPeriod(LocalDateTime dateIn, LocalDateTime dateOut) {
+        return roomDAO.findAvailableByPeriod(dateIn, dateOut);
     }
 }

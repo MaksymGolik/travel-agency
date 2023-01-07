@@ -59,24 +59,4 @@ public class BookingService implements IBookingService {
                 new EntityNotFoundException("Booking with id " + id + " not found"));
         bookingDAO.delete(booking);
     }
-
-    @Override
-    public boolean checkIfAvailableDate(LocalDateTime dateIn, LocalDateTime dateOut) {
-        if (dateOut.isBefore(dateIn)) {
-            throw new DateTimeException("The date of check_out is later than the date of check_in");
-        }
-        List<Booking> bookingList = bookingDAO.findAll();
-        for (Booking booking : bookingList) {
-            if (booking.getDateIn().isBefore(dateIn) && booking.getDateOut().isAfter(dateIn)
-                    || booking.getDateIn().isBefore(dateOut) && booking.getDateOut().isAfter(dateOut)
-                    || booking.getDateIn().isAfter(dateIn) && booking.getDateOut().isBefore(dateOut)
-                    || booking.getDateIn().isBefore(dateIn) && booking.getDateOut().isAfter(dateOut)
-            )
-                return false;
-        }
-        return true;
-    }
-
-
-
 }
