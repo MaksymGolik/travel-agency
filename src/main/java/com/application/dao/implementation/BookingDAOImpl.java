@@ -2,13 +2,13 @@ package com.application.dao.implementation;
 
 import com.application.dao.IBookingDAO;
 import com.application.model.Booking;
-import com.application.model.Room;
-import com.application.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

@@ -1,5 +1,6 @@
 package com.application.controller;
 
+import com.application.dto.SearchAvailableRoomsRequest;
 import com.application.dto.RoomCreateRequest;
 import com.application.dto.mapper.RoomMapper;
 import com.application.model.Room;
@@ -13,6 +14,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -96,5 +100,19 @@ public class RoomController {
         return "redirect:/rooms/all";
     }
 
+    @GetMapping("/search_available")
+    public String searchAvailable(Model model){
+        model.addAttribute("criteria", new SearchAvailableRoomsRequest());
+        return "search-rooms";
+    }
 
+    @PostMapping("/search_available")
+    public String searchAvailable(@ModelAttribute("period") SearchAvailableRoomsRequest searchAvailableRoomsRequest,
+                                  Model model){
+        LocalDateTime dateIn = LocalDate.parse(searchAvailableRoomsRequest.getDateIn()).atTime(14,0,0);
+        LocalDateTime dateOut = LocalDate.parse(searchAvailableRoomsRequest.getDateOut()).atTime(12,0,0);
+        List<Room> rooms = roomService.findAvailableByPeriod(dateIn,dateOut);
+        model.addAttribute("rooms", rooms.stream().map(RoomMapper::mapToDto).collect(Collectors.toList()));
+        return "rooms-list";
+    }
 }

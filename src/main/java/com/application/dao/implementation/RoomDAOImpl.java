@@ -1,6 +1,7 @@
 package com.application.dao.implementation;
 
 import com.application.dao.IRoomDAO;
+import com.application.model.Booking;
 import com.application.model.Hotel;
 import com.application.model.Room;
 import com.application.model.User;
@@ -8,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -68,5 +70,12 @@ public class RoomDAOImpl implements IRoomDAO {
         }
     }
 
-
+    @Override
+    public List<Room> findAvailableByPeriod(LocalDateTime dateIn, LocalDateTime dateOut) {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select distinct r from Booking b join b.rooms r where b.dateIn>:dateOut or b.dateOut<:dateIn", Room.class)
+                    .setParameter("dateOut",dateOut).setParameter("dateIn",dateIn)
+                    .getResultStream().collect(Collectors.toList());
+        }
+    }
 }
