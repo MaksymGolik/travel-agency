@@ -10,6 +10,6 @@ public interface IRoomService {
 
     void update(Room room);
     void delete(long id);
-    List<Room> getAll();
+    List<Room> readAll();
 
 }

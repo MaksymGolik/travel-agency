@@ -15,18 +15,18 @@ import javax.validation.constraints.NotNull;
 public class RoomCreateRequest {
 
 
-    //@NotNull
+    @NotNull
     private int numberOfRoom;
 
-  //  @NotNull
+    @NotNull
     private int peopleCapacity;
 
 
-   // @NotNull
+    @NotNull
     private double pricePerRoom;
 
 
-   // @NotEmpty
+
     private RoomType roomType;
 
 

@@ -3,11 +3,12 @@ package com.application.controller;
 
 import com.application.dto.HotelCreateRequest;
 import com.application.dto.mapper.HotelMapper;
+import com.application.dto.mapper.RoomMapper;
 import com.application.model.Hotel;
 import com.application.service.ICountryService;
 import com.application.service.IHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,12 +32,22 @@ public class HotelController {
         this.countryService = countryService;
     }
 
+
     @GetMapping("/all")
     public String getAll(Model model) {
 
             model.addAttribute("hotels", hotelService.readAll().stream()
                     .map(HotelMapper::mapToDto).collect(Collectors.toList()));
         return "hotels-list";
+    }
+
+    @GetMapping("/all/rooms/{hotel_id}")
+    public String getAllRoomInHotel (Model model,  @PathVariable(name = "hotel_id") long hotelId) {
+
+        model.addAttribute("rooms", hotelService.readAllRoomsInHotel(hotelId).stream()
+                .map(RoomMapper::mapToDto).collect(Collectors.toList()));
+        model.addAttribute("hotel", hotelService.readById(hotelId));
+        return "room-list-for-hotel";
     }
 
 
@@ -57,7 +68,7 @@ public class HotelController {
         hotel.setCountry(countryService.readByName(hotelCreateRequest.getCountry()));
 
         hotelService.saveHotel(hotel);
-        return "hotel-page";
+        return "redirect:/hotels/all";
 
     }
 
@@ -72,8 +83,12 @@ public class HotelController {
 
     @PostMapping("/{hotel_id}/update")
     public String update(@Valid @ModelAttribute("hotel") Hotel hotel,
-                         @PathVariable(name = "hotel_id") long hotelId)
+                         @PathVariable(name = "hotel_id") long hotelId,
+                         BindingResult result )
     {
+        if (result.hasErrors()) {
+            return "update-hotel";
+        }
         Hotel oldHotel = hotelService.readById(hotelId);
         oldHotel.setName(hotel.getName());
         oldHotel.setStarRating(hotel.getStarRating());
@@ -83,10 +98,10 @@ public class HotelController {
     }
 
     @DeleteMapping("/{hotel_id}")
-    @PreAuthorize("hasAuthority('MANAGER')")
-    public String delete(@PathVariable(value = "hotel_id") long hotelId, @PathVariable String hotel_id) {
+ //   @PreAuthorize("hasAuthority('MANAGER')")
+    public String delete(@PathVariable(value = "hotel_id") long hotelId) {
         hotelService.delete(hotelId);
-        return "hotel-page";
+        return "redirect:/hotels/all";
     }
 
 

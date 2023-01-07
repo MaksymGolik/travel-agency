@@ -2,11 +2,9 @@ package com.application.controller;
 
 
 import com.application.dto.CountryCreateRequest;
-import com.application.dto.HotelCreateRequest;
 import com.application.dto.mapper.CountryMapper;
 import com.application.dto.mapper.HotelMapper;
 import com.application.model.Country;
-import com.application.model.Hotel;
 import com.application.service.ICountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

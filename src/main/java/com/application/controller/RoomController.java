@@ -1,20 +1,19 @@
 package com.application.controller;
 
 import com.application.dto.RoomCreateRequest;
-import com.application.dto.mapper.HotelMapper;
 import com.application.dto.mapper.RoomMapper;
-import com.application.model.Hotel;
 import com.application.model.Room;
 import com.application.service.IHotelService;
 import com.application.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -50,47 +49,52 @@ public class RoomController {
         Room room   = RoomMapper.mapToModel(roomCreateRequest);
         room.setHotel(hotelService.readByName(roomCreateRequest.getHotel()));
         roomService.saveRoom(room);
-        return "room-list-for-hotel";
+        return "redirect:/rooms/all";
 
     }
 
+    @GetMapping("/all")
+    public String getAll(Model model) {
+
+        model.addAttribute("rooms", roomService.readAll().stream()
+                .map(RoomMapper::mapToDto).collect(Collectors.toList()));
+        return "rooms-list";
+    }
 
 
+    @GetMapping("/{room_id}/update")
+    public String update(Model model,
+                         @PathVariable(name = "room_id") long roomId) {
+
+        model.addAttribute("room", roomService.readById(roomId));
+        return "update-room";
+    }
 
 
-  //  @PreAuthorize(value = "hasAuthority('MANAGER')")
-/*    @GetMapping(value = "/create")
-    public ModelAndView addRoom(@PathVariable(value = "hotel_id") long hotelId){
-        ModelAndView mv = new ModelAndView();
-        Room room = new Room();
-        mv.setViewName("create-room");
-        room.setHotel(hotelService.readById(hotelId));
-        mv.getModel().put("room", room);
+    @PostMapping("/{room_id}/update")
+    public String update(@Valid @ModelAttribute("room") Room room,
+                         @PathVariable(name = "room_id") long roomId,
+                         BindingResult result   )
 
-        return mv;
-    }*/
+    {
+        if (result.hasErrors()) {
+            return "update-room";
+        }
+        Room oldRoom = roomService.readById(roomId);
+        oldRoom.setNumberOfRoom(room.getNumberOfRoom());
+        oldRoom.setPeopleCapacity(room.getPeopleCapacity());
+        oldRoom.setPricePerRoom(room.getPricePerRoom());
+        oldRoom.setRoomType(room.getRoomType());
+        roomService.update(oldRoom);
+        return "redirect:/rooms/all";
+    }
 
-    // @PreAuthorize(value = "hasAuthority('MANAGER')")
-  /*  @PostMapping(value = "/create")
-    public String addRoom( @PathVariable(value = "hotel_id") long hotelId, RoomCreateRequest roomCreateRequest ){
-
-        Room room = RoomMapper.mapToModel(roomCreateRequest);
-        room.setHotel(hotelService.readById(hotelId));
-        roomService.saveRoom(room);
-
-        return "hotel-page";
-    }*/
-
-
-
-    @DeleteMapping("/{room_id}/delete")
-    @PreAuthorize("hasAuthority('MANAGER')")
+    @GetMapping("/{room_id}/delete")
+    //   @PreAuthorize("hasAuthority('MANAGER')")
     public String delete(@PathVariable(value = "room_id") long roomId) {
         roomService.delete(roomId);
-        return "room-list-for-hotel";
+        return "redirect:/rooms/all";
     }
-
-
 
 
 }

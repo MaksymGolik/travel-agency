@@ -63,7 +63,7 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public List<Room> getAll() {
-        return null;
+    public List<Room> readAll() {
+        return roomDAO.findAll();
     }
 }

@@ -1,13 +1,16 @@
 package com.application.dao.implementation;
 
 import com.application.dao.IRoomDAO;
+import com.application.model.Hotel;
 import com.application.model.Room;
 import com.application.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Repository("roomDAOImpl")
@@ -55,6 +58,14 @@ public class RoomDAOImpl implements IRoomDAO {
             session.getTransaction().commit();
         }
 
+    }
+
+    @Override
+    public List<Room> findAll() {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select r from Room r", Room.class)
+                    .getResultStream().collect(Collectors.toList());
+        }
     }
 
 

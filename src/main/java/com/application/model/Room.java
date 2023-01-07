@@ -6,12 +6,9 @@ import javax.persistence.*;
 import lombok.*;
 
 
-@ToString
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "rooms")
-@NoArgsConstructor
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,15 +36,17 @@ public class Room {
     private Hotel hotel;
 
 
-
-
-
     @Builder
-    public Room(int numberOfRoom, int peopleCapacity, double pricePerRoom, RoomType roomType, Hotel hotel) {
+    public Room(long id, int numberOfRoom, int peopleCapacity, double pricePerRoom, RoomType roomType, Hotel hotel) {
+        this.id = id;
         this.numberOfRoom = numberOfRoom;
         this.peopleCapacity = peopleCapacity;
         this.pricePerRoom = pricePerRoom;
         this.roomType = roomType;
         this.hotel = hotel;
+    }
+
+    public Room() {
+
     }
 }
