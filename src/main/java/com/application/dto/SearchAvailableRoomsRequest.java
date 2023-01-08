@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class SearchAvailableRoomsRequest {
+    String country;
+    String hotelName;
     String dateIn;
     String dateOut;
 }

@@ -32,6 +32,63 @@
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-flag fa-lg me-3 fa-fw"></i>
+                                        <label class="form-label" for="country">Country</label>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <select name="country" id="country" class="form-control" onchange="filterHotels(this.id)">
+                                                <option th:each="country : ${countries}"
+                                                        th:value="${country.getName()}"
+                                                        th:text="${country.getName()}">
+                                                    Options
+                                                </option>
+                                            </select>
+                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('country')}"
+                                                   th:errors="*{country}"></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-flag fa-lg me-3 fa-fw"></i>
+                                        <label class="form-label" for="hotelName">Hotel</label>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <select name="hotelName" id="hotelName" class="form-control">
+                                                <option value="selected" selected>Select hotel</option>
+                                                <option th:each="hotel : ${hotels}"
+                                                        th:value="${hotel.getName()}"
+                                                        th:text="'['+${hotel.getCountry().getName()}+'] '+${hotel.getName()}">
+                                                    Options
+                                                </option>
+                                            </select>
+                                            <small class="form-text text-muted" th:if="${#fields.hasErrors('hotelName')}"
+                                                   th:errors="*{hotelName}"></small>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        function filterHotels(countryP){
+                                            var country = document.getElementById(countryP)
+                                            const hotelSelect = document.getElementById('hotelName')
+                                            document.getElementById('hotelName').value='selected';
+                                            for (var i = 0; i < hotelSelect.length; i++) {
+                                                var index = hotelSelect.options[i].text.indexOf(']');
+                                                var hotelCountry = hotelSelect.options[i].text.substring(1,index);
+                                                if (hotelCountry!==country.value) {
+                                                    hotelSelect.options[i].style.display = 'none';
+                                                } else {
+                                                    hotelSelect.options[i].style.display = 'list-item';
+                                                }
+                                            }
+                                        }
+                                    </script>
+
+                                    <script defer>
+                                        const hotelSelect = document.getElementById('hotelName')
+                                        for (var i = 0; i < hotelSelect.length; i++) {
+                                            hotelSelect.options[i].style.display = 'none';
+                                        }
+                                    </script>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-flag fa-lg me-3 fa-fw"></i>
                                         <label class="form-label" for="dateIn">Check in date</label>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="date" th:field="*{dateIn}" id="dateIn" class="form-control" />

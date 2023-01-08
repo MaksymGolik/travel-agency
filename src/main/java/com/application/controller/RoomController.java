@@ -4,6 +4,7 @@ import com.application.dto.SearchAvailableRoomsRequest;
 import com.application.dto.RoomCreateRequest;
 import com.application.dto.mapper.RoomMapper;
 import com.application.model.Room;
+import com.application.service.ICountryService;
 import com.application.service.IHotelService;
 import com.application.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +26,18 @@ import java.util.stream.Collectors;
 public class RoomController {
 
     IRoomService roomService;
-
     IHotelService hotelService;
+    ICountryService countryService;
 
 
 
     @Autowired
-    public RoomController(IRoomService roomService, IHotelService hotelService) {
+    public RoomController(IRoomService roomService,
+                          IHotelService hotelService,
+                          ICountryService countryService) {
         this.roomService = roomService;
         this.hotelService = hotelService;
+        this.countryService = countryService;
     }
 
     @GetMapping("/create")
@@ -102,6 +106,8 @@ public class RoomController {
 
     @GetMapping("/search_available")
     public String searchAvailable(Model model){
+        model.addAttribute("countries", countryService.readAll());
+        model.addAttribute("hotels", hotelService.readAll());
         model.addAttribute("criteria", new SearchAvailableRoomsRequest());
         return "search-rooms";
     }
