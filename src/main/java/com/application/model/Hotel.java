@@ -1,6 +1,9 @@
 package com.application.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 import lombok.*;
 
@@ -16,7 +19,11 @@ public class Hotel {
     @Column(name = "name", nullable = false)
     private String name;
 
+
     @Column(name = "star_rating")
+    @Min(0)
+    @Max(5)
+    @Positive
     private int starRating;
 
     @OneToOne
