@@ -4,6 +4,7 @@ import com.application.dao.IHotelDAO;
 import com.application.dao.IRoomDAO;
 import com.application.exception.CustomAccessDeniedException;
 import com.application.exception.EntityNotFoundException;
+import com.application.model.Booking;
 import com.application.model.Hotel;
 import com.application.model.Room;
 import com.application.service.IHotelService;
@@ -24,6 +25,8 @@ public class HotelServiceImpl implements IHotelService {
 
     private IHotelDAO hotelDAO;
     private IRoomDAO roomDAO;
+
+
 
 
 
@@ -81,6 +84,17 @@ public class HotelServiceImpl implements IHotelService {
     public void delete(long id) {
         Hotel hotel = hotelDAO.findHotelById(id).orElseThrow(() ->
                 new EntityNotFoundException("Hotel with id " + id + " not found"));
+
+
+        List<Room> roomList = roomDAO.findAll();
+
+        for (Room room: roomList) {
+            if(room.getHotel().equals(hotel)){
+                /*this is not thrown*/
+                throw new CustomAccessDeniedException("You can not remove hotel: " + hotel.getName()  + " in country " +  hotel.getCountry().getName() + ". There are some bookings in this room." );
+            }
+        }
+
         hotelDAO.delete(hotel);
 
 

@@ -35,8 +35,6 @@ c
 3src/main/java/com/application/dto/UserResponse.java,3\c\3cf3993266fb561a1ed35cfaf079b6f1d9fc1794
 b
 2src/main/webapp/WEB-INF/templates/create-user.html,2\2\22543a757e66d74414fdfaab95edebc6874f2894
-_
-/src/main/webapp/WEB-INF/templates/500-page.html,1\7\17b8d1b53d1b40b9d074c9e6b1c35aaca465cb81
 a
 1src/main/webapp/WEB-INF/templates/management.html,e\7\e76c6ed50d54da3769bf8cd3b8862056ca003971
 e
@@ -53,8 +51,6 @@ j
 :src/main/java/com/application/service/ICountryService.java,a\1\a1b88a183b71c397ee36858ea5f6447dac3b48e1
 i
 9src/main/java/com/application/dto/mapper/HotelMapper.java,8\2\82cd66d61e7ce84cccdcbef86a60c88276ce27a6
-h
-8src/main/java/com/application/dto/mapper/RoomMapper.java,3\6\365948e6753b8adb68c3f822b3f8cbec5b565cd5
 a
 1src/main/java/com/application/model/RoomType.java,9\e\9e531121ba57218e47b2a8d97d9d18eef408f076
 `

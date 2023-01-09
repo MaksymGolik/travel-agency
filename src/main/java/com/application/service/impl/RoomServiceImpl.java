@@ -28,15 +28,15 @@ public class RoomServiceImpl implements IRoomService {
 
     private IBookingDAO bookingDAO;
 
-    private BookingService bookingService;
+
 
 
 
     @Autowired
-    public RoomServiceImpl(@Qualifier("roomDAOImpl") IRoomDAO roomDAO,IBookingDAO bookingDAO, BookingService bookingService ) {
+    public RoomServiceImpl(@Qualifier("roomDAOImpl") IRoomDAO roomDAO,IBookingDAO bookingDAO ) {
         this.roomDAO = roomDAO;
         this.bookingDAO = bookingDAO;
-        this.bookingService = bookingService;
+
 
     }
 
@@ -79,7 +79,7 @@ public class RoomServiceImpl implements IRoomService {
          for (Booking booking: bookingList) {
             if(booking.getRooms().contains(room)){
                 /*this is not thrown*/
-                throw new CustomAccessDeniedException("You can not remove room:" + room.getNumberOfRoom() );
+                throw new CustomAccessDeniedException("You can not remove room: " + room.getNumberOfRoom() + " in hotel " + room.getHotel().getName() + ". There are some bookings in this room." );
             }
 
         }
