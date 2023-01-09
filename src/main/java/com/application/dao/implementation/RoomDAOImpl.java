@@ -73,8 +73,32 @@ public class RoomDAOImpl implements IRoomDAO {
     @Override
     public List<Room> findAvailableByPeriod(LocalDateTime dateIn, LocalDateTime dateOut) {
         try(Session session = sessionFactory.openSession()){
-            return session.createQuery("select distinct r from Booking b join b.rooms r where b.dateIn>:dateOut or b.dateOut<:dateIn", Room.class)
+            return session.createQuery("select r from Room r where r.id not in " +
+                            "(select distinct r.id from Booking b join b.rooms r where b.dateIn<:dateOut and b.dateOut>:dateIn)", Room.class)
                     .setParameter("dateOut",dateOut).setParameter("dateIn",dateIn)
+                    .getResultStream().collect(Collectors.toList());
+        }
+    }
+
+    @Override
+    public List<Room> findAvailableByCountryPeriod(String countryName, LocalDateTime dateIn, LocalDateTime dateOut) {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select r from Room r where r.id not in " +
+                            "(select distinct r.id from Booking b join b.rooms r where b.dateIn<:dateOut and b.dateOut>:dateIn) " +
+                            "and r.hotel.country.name=:countryName", Room.class)
+                    .setParameter("dateOut",dateOut).setParameter("dateIn",dateIn).setParameter("countryName",countryName)
+                    .getResultStream().collect(Collectors.toList());
+        }
+    }
+
+    @Override
+    public List<Room> findAvailableByCountryHotelPeriod(String countryName, String hotelName, LocalDateTime dateIn, LocalDateTime dateOut) {
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select r from Room r where r.id not in " +
+                            "(select distinct r.id from Booking b join b.rooms r where b.dateIn<:dateOut and b.dateOut>:dateIn) " +
+                            "and r.hotel.country.name=:countryName and r.hotel.name=:hotelName", Room.class)
+                    .setParameter("dateOut",dateOut).setParameter("dateIn",dateIn)
+                    .setParameter("countryName",countryName).setParameter("hotelName", hotelName)
                     .getResultStream().collect(Collectors.toList());
         }
     }

@@ -15,4 +15,6 @@ public interface IRoomDAO {
     void update (Room room);
     List<Room> findAll();
     List<Room> findAvailableByPeriod(LocalDateTime dateIn, LocalDateTime dateOut);
+    List<Room> findAvailableByCountryPeriod(String countryName, LocalDateTime dateIn, LocalDateTime dateOut);
+    List<Room> findAvailableByCountryHotelPeriod(String countryName, String hotelName, LocalDateTime dateIn, LocalDateTime dateOut);
 }

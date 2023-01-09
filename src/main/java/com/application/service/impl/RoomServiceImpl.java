@@ -98,4 +98,14 @@ public class RoomServiceImpl implements IRoomService {
     public List<Room> findAvailableByPeriod(LocalDateTime dateIn, LocalDateTime dateOut) {
         return roomDAO.findAvailableByPeriod(dateIn, dateOut);
     }
+
+    @Override
+    public List<Room> findAvailableByCountryPeriod(String countryName, LocalDateTime dateIn, LocalDateTime dateOut) {
+        return roomDAO.findAvailableByCountryPeriod(countryName, dateIn, dateOut);
+    }
+
+    @Override
+    public List<Room> findAvailableByCountryHotelPeriod(String countryName, String hotelName, LocalDateTime dateIn, LocalDateTime dateOut) {
+        return roomDAO.findAvailableByCountryHotelPeriod(countryName, hotelName, dateIn, dateOut);
+    }
 }

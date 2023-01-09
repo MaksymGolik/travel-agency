@@ -12,4 +12,7 @@ public interface IRoomService {
     void delete(long id);
     List<Room> readAll();
     List<Room> findAvailableByPeriod(LocalDateTime dateIn, LocalDateTime dateOut);
+    List<Room> findAvailableByCountryPeriod(String countryName, LocalDateTime dateIn, LocalDateTime dateOut);
+    List<Room> findAvailableByCountryHotelPeriod(String countryName, String hotelName, LocalDateTime dateIn, LocalDateTime dateOut);
+
 }
