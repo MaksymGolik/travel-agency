@@ -99,7 +99,11 @@ public class RoomController {
 
     @GetMapping("/{room_id}/delete")
     //   @PreAuthorize("hasAuthority('MANAGER')")
-    public String delete(@PathVariable(value = "room_id") long roomId) {
+    public String delete(@PathVariable(value = "room_id") long roomId, BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/rooms/all";
+        }
+
         roomService.delete(roomId);
         return "redirect:/rooms/all";
     }

@@ -4,6 +4,7 @@ package com.application.controller;
 import com.application.dto.HotelCreateRequest;
 import com.application.dto.mapper.HotelMapper;
 import com.application.dto.mapper.RoomMapper;
+import com.application.exception.CustomAccessDeniedHandler;
 import com.application.model.Hotel;
 import com.application.service.ICountryService;
 import com.application.service.IHotelService;
@@ -36,13 +37,13 @@ public class HotelController {
     @GetMapping("/all")
     public String getAll(Model model) {
 
-            model.addAttribute("hotels", hotelService.readAll().stream()
-                    .map(HotelMapper::mapToDto).collect(Collectors.toList()));
+        model.addAttribute("hotels", hotelService.readAll().stream()
+                .map(HotelMapper::mapToDto).collect(Collectors.toList()));
         return "hotels-list";
     }
 
     @GetMapping("/all/rooms/{hotel_id}")
-    public String getAllRoomInHotel (Model model,  @PathVariable(name = "hotel_id") long hotelId) {
+    public String getAllRoomInHotel(Model model, @PathVariable(name = "hotel_id") long hotelId) {
 
         model.addAttribute("rooms", hotelService.readAllRoomsInHotel(hotelId).stream()
                 .map(RoomMapper::mapToDto).collect(Collectors.toList()));
@@ -84,22 +85,22 @@ public class HotelController {
     @PostMapping("/{hotel_id}/update")
     public String update(@Valid @ModelAttribute("hotel") Hotel hotel,
                          @PathVariable(name = "hotel_id") long hotelId,
-                         BindingResult result )
-    {
+                         BindingResult result) {
         if (result.hasErrors()) {
             return "update-hotel";
         }
         Hotel oldHotel = hotelService.readById(hotelId);
         oldHotel.setName(hotel.getName());
         oldHotel.setStarRating(hotel.getStarRating());
-       hotelService.update(oldHotel);
+        hotelService.update(oldHotel);
 
         return "redirect:/hotels/all";
     }
 
-    @DeleteMapping("/{hotel_id}")
- //   @PreAuthorize("hasAuthority('MANAGER')")
+    @GetMapping("/{hotel_id}/delete")
+    //   @PreAuthorize("hasAuthority('MANAGER')")
     public String delete(@PathVariable(value = "hotel_id") long hotelId) {
+
         hotelService.delete(hotelId);
         return "redirect:/hotels/all";
     }
