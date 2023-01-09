@@ -1,5 +1,6 @@
 package com.application.controller;
 
+import com.application.dto.RoomResponse;
 import com.application.dto.SearchAvailableRoomsRequest;
 import com.application.dto.RoomCreateRequest;
 import com.application.dto.mapper.RoomMapper;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -117,9 +119,21 @@ public class RoomController {
     @PostMapping("/search_available")
     public String searchAvailable(@ModelAttribute("period") SearchAvailableRoomsRequest searchAvailableRoomsRequest,
                                   Model model){
+        List<Room> rooms;
         LocalDateTime dateIn = LocalDate.parse(searchAvailableRoomsRequest.getDateIn()).atTime(14,0,0);
         LocalDateTime dateOut = LocalDate.parse(searchAvailableRoomsRequest.getDateOut()).atTime(12,0,0);
-        List<Room> rooms = roomService.findAvailableByPeriod(dateIn,dateOut);
+        String country = searchAvailableRoomsRequest.getCountry();
+        String hotel = searchAvailableRoomsRequest.getHotelName();
+        if(!hotel.isEmpty() && !country.isEmpty()){
+            rooms = roomService.findAvailableByCountryHotelPeriod(country,hotel,dateIn,dateOut);
+        } else if(!country.isEmpty()){
+            rooms = roomService.findAvailableByCountryPeriod(country,dateIn,dateOut);
+        } else rooms = roomService.findAvailableByPeriod(dateIn,dateOut);
+
+        // TODO
+        Map<RoomResponse,List<Long>> catalog = RoomMapper.mapToRoomCatalog(rooms);
+        //
+
         model.addAttribute("rooms", rooms.stream().map(RoomMapper::mapToDto).collect(Collectors.toList()));
         return "rooms-list";
     }

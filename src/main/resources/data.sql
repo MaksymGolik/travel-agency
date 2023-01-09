@@ -19,7 +19,8 @@ INSERT INTO rooms ( number_of_room, people_capacity, price, room_type, hotel_id)
 INSERT INTO rooms (  number_of_room, people_capacity, price, room_type, hotel_id) VALUES ( 132, 3, 80.0, 'SUITE_MINI', 3);
 INSERT INTO rooms (  number_of_room, people_capacity, price, room_type, hotel_id) VALUES ( 237, 1, 70.0, 'DUPLEX', 1);
 INSERT INTO rooms (  number_of_room, people_capacity, price, room_type, hotel_id) VALUES ( 238, 1, 90.0, 'SUITE', 2);
-
+INSERT INTO rooms (  number_of_room, people_capacity, price, room_type, hotel_id) VALUES ( 239, 1, 90.0, 'SUITE', 2);
+INSERT INTO rooms (  number_of_room, people_capacity, price, room_type, hotel_id) VALUES ( 238, 1, 70.0, 'DUPLEX', 1);
 
 INSERT INTO booking ( date_in, date_out, total_price, user_id) VALUES ('2023-01-05 14:00','2023-01-07 12:00', 100.0, 1  );
 INSERT INTO booking ( date_in, date_out, total_price, user_id) VALUES ('2023-01-02 14:00','2023-01-04 12:00', 160.0, 3  );

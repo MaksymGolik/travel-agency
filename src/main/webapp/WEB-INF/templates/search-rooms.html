@@ -35,6 +35,7 @@
                                         <label class="form-label" for="country">Country</label>
                                         <div class="form-outline flex-fill mb-0">
                                             <select name="country" id="country" class="form-control" onchange="filterHotels(this.id)">
+                                                <option value="" selected>Select country</option>
                                                 <option th:each="country : ${countries}"
                                                         th:value="${country.getName()}"
                                                         th:text="${country.getName()}">
@@ -51,7 +52,7 @@
                                         <label class="form-label" for="hotelName">Hotel</label>
                                         <div class="form-outline flex-fill mb-0">
                                             <select name="hotelName" id="hotelName" class="form-control">
-                                                <option value="selected" selected>Select hotel</option>
+                                                <option value="" selected>Select hotel</option>
                                                 <option th:each="hotel : ${hotels}"
                                                         th:value="${hotel.getName()}"
                                                         th:text="'['+${hotel.getCountry().getName()}+'] '+${hotel.getName()}">
@@ -65,9 +66,10 @@
 
                                     <script>
                                         function filterHotels(countryP){
+                                            document.getElementById('country').options[0].style.display='none'
                                             var country = document.getElementById(countryP)
                                             const hotelSelect = document.getElementById('hotelName')
-                                            document.getElementById('hotelName').value='selected';
+                                            document.getElementById('hotelName').value='';
                                             for (var i = 0; i < hotelSelect.length; i++) {
                                                 var index = hotelSelect.options[i].text.indexOf(']');
                                                 var hotelCountry = hotelSelect.options[i].text.substring(1,index);
@@ -91,7 +93,7 @@
                                         <i class="fas fa-flag fa-lg me-3 fa-fw"></i>
                                         <label class="form-label" for="dateIn">Check in date</label>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="date" th:field="*{dateIn}" id="dateIn" class="form-control" />
+                                            <input required type="date" th:field="*{dateIn}" id="dateIn" class="form-control" />
                                             <small class="form-text text-muted" th:if="${#fields.hasErrors('dateIn')}"
                                                    th:errors="*{dateIn}"></small>
                                         </div>
@@ -101,7 +103,7 @@
                                         <i class="fas fa-flag fa-lg me-3 fa-fw"></i>
                                         <label class="form-label" for="dateOut">Check out date</label>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="date" th:field="*{dateOut}" id="dateOut" class="form-control" />
+                                            <input required type="date" th:field="*{dateOut}" id="dateOut" class="form-control" />
                                             <small class="form-text text-muted" th:if="${#fields.hasErrors('dateOut')}"
                                                    th:errors="*{dateOut}"></small>
                                         </div>
