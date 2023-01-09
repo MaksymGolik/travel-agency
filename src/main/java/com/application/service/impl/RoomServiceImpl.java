@@ -1,7 +1,13 @@
 package com.application.service.impl;
 
+import com.application.dao.IBookingDAO;
+import com.application.dao.IHotelDAO;
 import com.application.dao.IRoomDAO;
+import com.application.exception.CustomAccessDeniedException;
+import com.application.exception.CustomAccessDeniedHandler;
 import com.application.exception.EntityNotFoundException;
+import com.application.model.Booking;
+import com.application.model.Hotel;
 import com.application.model.Room;
 import com.application.service.IRoomService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +26,17 @@ public class RoomServiceImpl implements IRoomService {
 
     private IRoomDAO roomDAO;
 
+    private IBookingDAO bookingDAO;
+
+    private BookingService bookingService;
+
+
 
     @Autowired
-    public RoomServiceImpl(@Qualifier("roomDAOImpl") IRoomDAO roomDAO) {
+    public RoomServiceImpl(@Qualifier("roomDAOImpl") IRoomDAO roomDAO,IBookingDAO bookingDAO, BookingService bookingService ) {
         this.roomDAO = roomDAO;
+        this.bookingDAO = bookingDAO;
+        this.bookingService = bookingService;
 
     }
 
@@ -60,7 +73,20 @@ public class RoomServiceImpl implements IRoomService {
     public void delete(long id) {
         Room room = roomDAO.findRoomById(id).orElseThrow(()->
                 new EntityNotFoundException("Room with id "+ id + " not found"));
+
+        List<Booking> bookingList = bookingDAO.findAll();
+
+         for (Booking booking: bookingList) {
+            if(booking.getRooms().contains(room)){
+                /*this is not thrown*/
+                throw new CustomAccessDeniedException("You can not remove room:" + room.getNumberOfRoom() );
+            }
+
+        }
         roomDAO.delete(room);
+
+
+
     }
 
     @Override

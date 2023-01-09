@@ -2,6 +2,7 @@ package com.application.service.impl;
 
 import com.application.dao.IHotelDAO;
 import com.application.dao.IRoomDAO;
+import com.application.exception.CustomAccessDeniedException;
 import com.application.exception.EntityNotFoundException;
 import com.application.model.Hotel;
 import com.application.model.Room;
@@ -23,6 +24,9 @@ public class HotelServiceImpl implements IHotelService {
 
     private IHotelDAO hotelDAO;
     private IRoomDAO roomDAO;
+
+
+
 
 
     @Autowired
@@ -78,6 +82,8 @@ public class HotelServiceImpl implements IHotelService {
         Hotel hotel = hotelDAO.findHotelById(id).orElseThrow(() ->
                 new EntityNotFoundException("Hotel with id " + id + " not found"));
         hotelDAO.delete(hotel);
+
+
     }
 
     @Override

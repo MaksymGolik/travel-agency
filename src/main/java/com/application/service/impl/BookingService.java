@@ -59,4 +59,9 @@ public class BookingService implements IBookingService {
                 new EntityNotFoundException("Booking with id " + id + " not found"));
         bookingDAO.delete(booking);
     }
+
+    @Override
+    public List<Booking> readAll() {
+        return bookingDAO.findAll();
+    }
 }

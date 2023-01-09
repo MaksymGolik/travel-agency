@@ -8,6 +8,7 @@ import com.application.service.ICountryService;
 import com.application.service.IHotelService;
 import com.application.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -98,11 +99,8 @@ public class RoomController {
     }
 
     @GetMapping("/{room_id}/delete")
-    //   @PreAuthorize("hasAuthority('MANAGER')")
-    public String delete(@PathVariable(value = "room_id") long roomId, BindingResult result) {
-        if (result.hasErrors()) {
-            return "redirect:/rooms/all";
-        }
+     // @PreAuthorize("hasAuthority('MANAGER')")
+    public String delete(@PathVariable(value = "room_id") long roomId) {
 
         roomService.delete(roomId);
         return "redirect:/rooms/all";

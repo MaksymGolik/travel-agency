@@ -11,4 +11,6 @@ public interface IBookingService {
     void saveBooking(Booking booking);
     void update(Booking booking);
     void delete(long id);
+
+    List<Booking> readAll();
 }
