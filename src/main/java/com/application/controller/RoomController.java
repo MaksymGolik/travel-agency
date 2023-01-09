@@ -4,6 +4,7 @@ import com.application.dto.RoomResponse;
 import com.application.dto.SearchAvailableRoomsRequest;
 import com.application.dto.RoomCreateRequest;
 import com.application.dto.mapper.RoomMapper;
+import com.application.exception.CustomAccessDeniedException;
 import com.application.model.Room;
 import com.application.service.ICountryService;
 import com.application.service.IHotelService;
@@ -124,6 +125,14 @@ public class RoomController {
         LocalDateTime dateOut = LocalDate.parse(searchAvailableRoomsRequest.getDateOut()).atTime(12,0,0);
         String country = searchAvailableRoomsRequest.getCountry();
         String hotel = searchAvailableRoomsRequest.getHotelName();
+        LocalDateTime dateNow = LocalDateTime.now();
+        if (dateIn.isAfter(dateOut) ) {
+            throw new CustomAccessDeniedException("Date check in is after or is the same as date check out. Please, choose correct range of date. ");
+        }
+        if (dateIn.isAfter(dateNow)) {
+            throw new CustomAccessDeniedException("Date check in is before now. You can not to reservation in the past. Please, choose correct range of date. ");
+        }
+
         if(!hotel.isEmpty() && !country.isEmpty()){
             rooms = roomService.findAvailableByCountryHotelPeriod(country,hotel,dateIn,dateOut);
         } else if(!country.isEmpty()){
