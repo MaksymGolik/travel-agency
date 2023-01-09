@@ -5,8 +5,12 @@ import javax.persistence.*;
 
 import lombok.*;
 
+import java.util.Objects;
 
-@Data
+
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "rooms")
 public class Room {
@@ -48,5 +52,18 @@ public class Room {
 
     public Room() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return id == room.id && numberOfRoom == room.numberOfRoom && peopleCapacity == room.peopleCapacity && Double.compare(room.pricePerRoom, pricePerRoom) == 0 && roomType == room.roomType && hotel.equals(room.hotel);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, numberOfRoom, peopleCapacity, pricePerRoom, roomType, hotel);
     }
 }

@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Objects;
+
 
 @ToString
 @Getter
@@ -31,5 +33,18 @@ public class Country {
     public Country (long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Country country = (Country) o;
+        return id == country.id && name.equals(country.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

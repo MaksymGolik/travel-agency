@@ -7,8 +7,12 @@ import javax.validation.constraints.Positive;
 
 import lombok.*;
 
+import java.util.Objects;
 
-@Data
+
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "hotels")
 public class Hotel {
@@ -41,5 +45,18 @@ public class Hotel {
         this.name = name;
         this.starRating = starRating;
         this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hotel hotel = (Hotel) o;
+        return id == hotel.id && starRating == hotel.starRating && name.equals(hotel.name) && country.equals(hotel.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, starRating, country);
     }
 }
