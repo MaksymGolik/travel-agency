@@ -114,6 +114,7 @@ public class RoomController {
         model.addAttribute("countries", countryService.readAll());
         model.addAttribute("hotels", hotelService.readAll());
         model.addAttribute("criteria", new SearchAvailableRoomsRequest());
+        model.addAttribute("rooms",roomService.readAll());
         return "search-rooms";
     }
 
@@ -140,10 +141,10 @@ public class RoomController {
         } else rooms = roomService.findAvailableByPeriod(dateIn,dateOut);
 
         // TODO
-        Map<RoomResponse,List<Long>> catalog = RoomMapper.mapToRoomCatalog(rooms);
-        //
 
+        Map<RoomResponse,List<Long>> catalog = RoomMapper.mapToRoomCatalog(rooms);
         model.addAttribute("rooms", rooms.stream().map(RoomMapper::mapToDto).collect(Collectors.toList()));
-        return "rooms-list";
+        return "rooms-list-available-for-booking";
+
     }
 }
