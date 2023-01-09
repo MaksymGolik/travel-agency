@@ -125,11 +125,11 @@ public class RoomController {
         LocalDateTime dateOut = LocalDate.parse(searchAvailableRoomsRequest.getDateOut()).atTime(12,0,0);
         String country = searchAvailableRoomsRequest.getCountry();
         String hotel = searchAvailableRoomsRequest.getHotelName();
-        LocalDateTime dateNow = LocalDateTime.now();
+
         if (dateIn.isAfter(dateOut) ) {
             throw new CustomAccessDeniedException("Date check in is after or is the same as date check out. Please, choose correct range of date. ");
         }
-        if (dateIn.isAfter(dateNow)) {
+        if (dateIn.isBefore(LocalDateTime.now())) {
             throw new CustomAccessDeniedException("Date check in is before now. You can not to reservation in the past. Please, choose correct range of date. ");
         }
 

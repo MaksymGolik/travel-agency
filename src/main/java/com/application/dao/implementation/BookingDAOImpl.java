@@ -51,6 +51,7 @@ public class BookingDAOImpl implements IBookingDAO {
 
     @Override
     public void addBooking(Booking booking) {
+
         try(Session session = sessionFactory.openSession()){
             session.beginTransaction();
             session.persist(booking);
