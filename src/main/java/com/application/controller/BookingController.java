@@ -59,9 +59,14 @@ public class BookingController {
             roomsAvailableList.add(roomService.readById(roomId));
         }
 
+
+
+        int differenceOfYears = dateOut.getYear() - dateIn.getYear();
         int dayIn = dateIn.getDayOfYear();
-        int dayOut = dateOut.getDayOfYear();
-        int numberOfBookingDay = Math.abs(dayIn - dayOut);
+        int dayOut = dateOut.getDayOfYear() + differenceOfYears*365;
+        int numberOfBookingDay  = dayOut - dayIn;
+
+
 
         double valueOfAllAvailableRoomsPerNight = 0;
 
@@ -74,6 +79,7 @@ public class BookingController {
         bookingService.saveBooking(new Booking(dateIn, dateOut, totalValue, user, roomsAvailableList));
         BookingResponse bookingResponse = BookingMapper.mapToDto(new Booking(dateIn, dateOut, totalValue, user, roomsAvailableList));
         model.addAttribute("bookingResponse", bookingResponse);
+
         return "bookings-info";
 
     }
@@ -84,7 +90,7 @@ public class BookingController {
     public String delete(@PathVariable(value = "booking_id") long bookingId) {
 
         bookingService.delete(bookingId);
-        return "redirect:/rooms/all";
+        return "redirect:/rooms/all";  // need change
     }
 
 
