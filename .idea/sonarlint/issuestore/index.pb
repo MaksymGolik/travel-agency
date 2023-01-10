@@ -81,10 +81,6 @@ c
 3src/main/webapp/WEB-INF/templates/create-hotel.html,2\7\271b170b0c6cd138573fe756b67588f613a16a8e
 d
 4src/main/webapp/WEB-INF/templates/bookings-list.html,9\b\9b8a5a4a24e3d8aef759f59c7e26ec3caced8d15
-c
-3src/main/webapp/WEB-INF/templates/search-rooms.html,d\7\d7f0414f0780f8543bb48842ddba4f713b2664d2
-u
-Esrc/main/java/com/application/dto/mapper/UserCreateRequestMapper.java,4\c\4c50c323abb56b803add3dfe1e8b526c04a32928
 b
 2src/main/java/com/application/dao/ICountryDAO.java,6\0\606d921f5edb70b7201ee04841fa8b3cfb69c6f4
 `

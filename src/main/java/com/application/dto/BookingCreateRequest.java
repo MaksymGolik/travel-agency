@@ -11,8 +11,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class BookingCreateRequest {
+
+  List<Long> roomIdList;
+
     String dateIn;
     String dateOut;
 
-  List<Long> roomIdList;
 }

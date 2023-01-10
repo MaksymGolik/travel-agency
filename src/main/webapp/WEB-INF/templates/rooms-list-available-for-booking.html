@@ -50,7 +50,7 @@
 
     <h1> List of available Rooms in chosen period time:   </h1>
 
-    <span th:text="|${dateIn}|"  /> -  <span th:text="|${dateOut}|" />
+   <!-- <span th:text="|${dateIn}|"  /> -  <span th:text="|${dateOut}|" />-->
 
 
 
@@ -74,9 +74,6 @@
             <th colspan="2">Operations</th>
         </tr>
         <tr th:each="room:${rooms}">
-
-
-
             <td>
                 <label for="room"></label>
                 <input type="checkbox" id="room" th:field="*{roomIdList}" th:value="${room.getId()}">
@@ -96,6 +93,13 @@
             <td><a th:href="@{/rooms/{id}/update(id=${room.getId()})}">Update</a></td>
             <td><a th:href="@{/rooms/{id}/delete(id=${room.getId()})}">Delete</a></td>
         </tr>
+
+        <label for="dateIn"></label>
+        <input type="text" hidden id="dateIn" th:field="*{dateIn}" th:value="${dateIn}" >
+        <label for="dateOut"></label>
+        <input type="text" hidden id="dateOut" th:field="*{dateOut}" th:value="${dateOut}" >
+
+
     </table>
 
       <!--  <button onclick="onCheckboxSubmit()">Click me</button>-->
