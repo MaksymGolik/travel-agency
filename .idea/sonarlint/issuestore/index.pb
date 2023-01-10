@@ -25,8 +25,6 @@ f
 6src/main/java/com/application/config/WebMvcConfig.java,c\1\c120721e3c649acea9378aa9bc7aa8270756e83f
 a
 1src/main/webapp/WEB-INF/templates/users-list.html,3\e\3eaf6a7e7f89945ff3a46608c4ab501ceeebefc7
-]
--src/main/webapp/WEB-INF/templates/header.html,6\1\61d5d0aeebd572f43596f56733462d73f937e655
 g
 7src/main/java/com/application/service/IUserService.java,1\8\180f101b3c8ad3f006e47239fc6248be8ed9c2f4
 o
@@ -73,8 +71,6 @@ c
 3src/main/webapp/WEB-INF/templates/update-hotel.html,a\2\a26340ee6a5709d7f9a02591c43a619dcce15761
 b
 2src/main/webapp/WEB-INF/templates/update-room.html,9\6\9645d79654d6994fd7626d195ff6c6a4db7e215c
-f
-6src/main/java/com/application/dto/CountryResponse.java,8\5\8566288a2942462efdf40fbd61acfd02b17ca9ea
 d
 4src/main/java/com/application/dto/HotelResponse.java,5\8\589739dfcf189eb3d76c70a3b68d00ae950c7636
 7
@@ -83,16 +79,12 @@ e
 5src/main/webapp/WEB-INF/templates/create-country.html,6\e\6e7f2e862ce2870b2d988283be7c9f72d04245e1
 c
 3src/main/webapp/WEB-INF/templates/create-hotel.html,2\7\271b170b0c6cd138573fe756b67588f613a16a8e
-i
-9src/main/java/com/application/dto/HotelCreateRequest.java,c\4\c4b9e23360c5d8301e24151326d0297669e51873
 d
 4src/main/webapp/WEB-INF/templates/bookings-list.html,9\b\9b8a5a4a24e3d8aef759f59c7e26ec3caced8d15
 c
 3src/main/webapp/WEB-INF/templates/search-rooms.html,d\7\d7f0414f0780f8543bb48842ddba4f713b2664d2
 u
 Esrc/main/java/com/application/dto/mapper/UserCreateRequestMapper.java,4\c\4c50c323abb56b803add3dfe1e8b526c04a32928
-f
-6src/main/java/com/application/dto/BookingResponse.java,6\7\675ae625c7d3fbaa03656e9d2b8d496564d12490
 b
 2src/main/java/com/application/dao/ICountryDAO.java,6\0\606d921f5edb70b7201ee04841fa8b3cfb69c6f4
 `

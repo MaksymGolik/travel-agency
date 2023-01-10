@@ -16,10 +16,49 @@
 <th:block th:include="header"/>
 <th:block sec:authorize="hasAuthority('MANAGER')" th:include="manager-header"/>
 
+<!--<script type="text/javascript">
+
+    function onCheckboxSubmit(){
+        yourArray=[];
+
+
+
+        $("input:checkbox[name=room-checkbox]:checked").each(function(){
+
+            yourArray.push($(this).val());
+
+        });
+
+
+        const data = { roomId: yourArray } ;
+
+        fetch('http://localhost:8080/bookings/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+
+
+    }
+
+</script>-->
+
+
 <div class="container centered mt-5">
 
-    <h1> List of available Rooms in chosen period time </h1>
-    <tr th:each="room:${rooms}">
+    <h1> List of available Rooms in chosen period time:   </h1>
+
+    <span th:text="|${dateIn}|"  /> -  <span th:text="|${dateOut}|" />
+
+
+
+
+    <form th:method="POST" id="booking" th:action="@{/bookings/create}" th:object="${booking}">
+
+   <!-- <tr th:each="room:${rooms}">-->
+
     <table class="table table-hover text-center">
 
         </tr>
@@ -36,11 +75,17 @@
         </tr>
         <tr th:each="room:${rooms}">
 
-          <td> <form>
 
-                    <input type="checkbox" id="room">
-                    <label for="room">  </label>
-            </form> </td>
+
+            <td>
+                <label for="room"></label>
+                <input type="checkbox" id="room" th:field="*{roomIdList}" th:value="${room.getId()}">
+            </td>
+
+         <!-- <td>
+              <input name="room-checkbox" th:value="${room.getId()}" type="checkbox" id="room"/>
+             &lt;!&ndash; <input class="room-checkbox" th:value="${room.getId()}" type="checkbox"/>&ndash;&gt;
+          </td>-->
 
             <td th:text="${room.getId()}"/>
             <td th:text="${room.getNumberOfRoom()}"></td>
@@ -52,6 +97,16 @@
             <td><a th:href="@{/rooms/{id}/delete(id=${room.getId()})}">Delete</a></td>
         </tr>
     </table>
+
+      <!--  <button onclick="onCheckboxSubmit()">Click me</button>-->
+
+        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+            <button type="submit" class="btn btn-info btn-lg reg">Book</button>
+            <button type="reset" class="btn btn-secondary btn-lg clr">Clear</button>
+        </div>
+
+
+    </form>
 </div>
 </body>
 </html>

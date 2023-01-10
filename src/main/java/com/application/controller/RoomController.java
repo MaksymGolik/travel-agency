@@ -1,5 +1,6 @@
 package com.application.controller;
 
+import com.application.dto.BookingCreateRequest;
 import com.application.dto.RoomResponse;
 import com.application.dto.SearchAvailableRoomsRequest;
 import com.application.dto.RoomCreateRequest;
@@ -115,6 +116,8 @@ public class RoomController {
         model.addAttribute("hotels", hotelService.readAll());
         model.addAttribute("criteria", new SearchAvailableRoomsRequest());
         model.addAttribute("rooms",roomService.readAll());
+
+
         return "search-rooms";
     }
 
@@ -142,8 +145,13 @@ public class RoomController {
 
         // TODO
 
-        Map<RoomResponse,List<Long>> catalog = RoomMapper.mapToRoomCatalog(rooms);
+     //   Map<RoomResponse,List<Long>> catalog = RoomMapper.mapToRoomCatalog(rooms);
+
         model.addAttribute("rooms", rooms.stream().map(RoomMapper::mapToDto).collect(Collectors.toList()));
+        model.addAttribute("dateIn", dateIn);
+        model.addAttribute("dateOut", dateOut);
+        model.addAttribute("booking", new BookingCreateRequest());
+
         return "rooms-list-available-for-booking";
 
     }
