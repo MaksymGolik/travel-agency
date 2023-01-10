@@ -148,11 +148,10 @@ public class RoomController {
      //   Map<RoomResponse,List<Long>> catalog = RoomMapper.mapToRoomCatalog(rooms);
 
         model.addAttribute("rooms", rooms.stream().map(RoomMapper::mapToDto).collect(Collectors.toList()));
-        model.addAttribute("dateIn", dateIn);
-        model.addAttribute("dateOut", dateOut);
-        model.addAttribute("booking", new BookingCreateRequest());
-
+        BookingCreateRequest booking = new BookingCreateRequest();
+        booking.setDateIn(dateIn);
+        booking.setDateOut(dateOut);
+        model.addAttribute("booking", booking);
         return "rooms-list-available-for-booking";
-
     }
 }

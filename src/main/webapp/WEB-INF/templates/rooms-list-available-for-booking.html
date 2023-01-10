@@ -50,7 +50,7 @@
 
     <h1> List of available Rooms in chosen period time:   </h1>
 
-   <!-- <span th:text="|${dateIn}|"  /> -  <span th:text="|${dateOut}|" />-->
+    <span th:text="${booking.getDateIn()}"  /> -  <span th:text="${booking.getDateOut()}" />
 
 
 
@@ -61,7 +61,6 @@
 
     <table class="table table-hover text-center">
 
-        </tr>
 
         <tr>
             <th>Chose</th>
@@ -95,9 +94,9 @@
         </tr>
 
         <label for="dateIn"></label>
-        <input type="text" hidden id="dateIn" th:field="*{dateIn}" th:value="${dateIn}" >
+        <input type="hidden" id="dateIn" th:field="*{dateIn}" th:value="${booking.getDateIn()}" >
         <label for="dateOut"></label>
-        <input type="text" hidden id="dateOut" th:field="*{dateOut}" th:value="${dateOut}" >
+        <input type="hidden" id="dateOut" th:field="*{dateOut}" th:value="${booking.getDateOut()}" >
 
 
     </table>

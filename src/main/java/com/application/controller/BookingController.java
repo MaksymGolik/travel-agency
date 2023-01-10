@@ -38,15 +38,8 @@ public class BookingController {
     @PostMapping("/create")
     public String create(@ModelAttribute("booking") BookingCreateRequest bookingCreateRequest, Model model){
         List<Long> roomIdList = bookingCreateRequest.getRoomIdList();
-        String dateIn = bookingCreateRequest.getDateIn();
-        String dateOut = bookingCreateRequest.getDateOut();
-       // model.addAttribute("rooms", rooms.stream().map(RoomMapper::mapToDto).collect(Collectors.toList()));
-        model.addAttribute("dateIn", dateIn);
-        model.addAttribute("dateOut", dateOut);
-        model.addAttribute("booking", new BookingCreateRequest());
-
-
-
+        LocalDateTime dateIn = bookingCreateRequest.getDateIn();
+        LocalDateTime dateOut = bookingCreateRequest.getDateOut();
         return null;
     }
 
