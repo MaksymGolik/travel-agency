@@ -4,6 +4,7 @@ import com.application.dto.BookingCreateRequest;
 import com.application.dto.BookingResponse;
 import com.application.dto.UserCreateRequest;
 import com.application.dto.mapper.BookingMapper;
+import com.application.dto.mapper.RoomMapper;
 import com.application.model.Booking;
 import com.application.model.Room;
 import com.application.model.User;
@@ -22,6 +23,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/bookings")
@@ -90,7 +92,16 @@ public class BookingController {
     public String delete(@PathVariable(value = "booking_id") long bookingId) {
 
         bookingService.delete(bookingId);
-        return "redirect:/rooms/all";  // need change
+        return "bookings-list";
+    }
+
+
+    @GetMapping("/all")
+    public String getAll(Model model) {
+
+        model.addAttribute("bookings", bookingService.readAll().stream()
+                .map(BookingMapper::mapToDto).collect(Collectors.toList()));
+        return "bookings-list";
     }
 
 

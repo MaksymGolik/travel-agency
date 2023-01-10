@@ -61,8 +61,6 @@ e
 5src/main/webapp/WEB-INF/templates/create-country.html,6\e\6e7f2e862ce2870b2d988283be7c9f72d04245e1
 c
 3src/main/webapp/WEB-INF/templates/create-hotel.html,2\7\271b170b0c6cd138573fe756b67588f613a16a8e
-d
-4src/main/webapp/WEB-INF/templates/bookings-list.html,9\b\9b8a5a4a24e3d8aef759f59c7e26ec3caced8d15
 b
 2src/main/java/com/application/dao/ICountryDAO.java,6\0\606d921f5edb70b7201ee04841fa8b3cfb69c6f4
 `
