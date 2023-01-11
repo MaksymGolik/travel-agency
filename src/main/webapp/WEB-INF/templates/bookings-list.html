@@ -32,7 +32,7 @@
       <td th:text="${booking.getDateOut().toLocalDate()}"></td>
       <td th:text="${booking.getGuest().getId()}"/>
       <td><a th:href="@{/bookings/{id}(id=${booking.getId()})}">Booking info</a></td>
-      <td><a th:href="@{/bookings/{id}/delete(id=${booking.getId()})}">Remove</a></td>
+      <td><a sec:authorize="hasAuthority('MANAGER')" th:href="@{/bookings/{id}/delete(id=${booking.getId()})}">Remove</a></td>
     </tr>
   </table>
 </div>

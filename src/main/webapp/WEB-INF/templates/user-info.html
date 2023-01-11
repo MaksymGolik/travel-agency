@@ -76,6 +76,7 @@
                                         <input type="text" readonly th:value="${userResponse.getRole().name()}" id="role" class="form-control" />
                                     </div>
                                 </div>
+                                <td><a th:href="@{/bookings/all/users/{id}(id=${userResponse.getId()})}">Bookings</a></td>
                             </div>
                         </div>
                     </div>

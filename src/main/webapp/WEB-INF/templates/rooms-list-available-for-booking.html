@@ -50,9 +50,7 @@
 
     <h1> List of available Rooms in chosen period time:   </h1>
 
-    <span th:text="${booking.getDateIn()}"  /> -  <span th:text="${booking.getDateOut()}" />
-
-
+    <span th:text="${booking.getDateIn().toLocalDate()}"  /> -  <span th:text="${booking.getDateOut().toLocalDate()}" />
 
 
     <form th:method="POST" id="booking" th:action="@{/bookings/create}" th:object="${booking}">
@@ -70,7 +68,7 @@
             <th>Price of the room per night</th>
             <th>Room Type</th>
             <th>Hotel</th>
-            <th colspan="2">Operations</th>
+
         </tr>
         <tr th:each="room:${rooms}">
             <td>
@@ -89,8 +87,7 @@
             <td th:text="${room.getPricePerRoom()}"/>
             <td th:text="${room.getRoomType()}"/>
             <td th:text="${room.getHotel().getName()}"/>
-            <td><a th:href="@{/rooms/{id}/update(id=${room.getId()})}">Update</a></td>
-            <td><a th:href="@{/rooms/{id}/delete(id=${room.getId()})}">Delete</a></td>
+
         </tr>
 
         <label for="dateIn"></label>

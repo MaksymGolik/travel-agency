@@ -25,8 +25,6 @@ b
 2src/main/webapp/WEB-INF/templates/create-user.html,2\2\22543a757e66d74414fdfaab95edebc6874f2894
 a
 1src/main/webapp/WEB-INF/templates/management.html,e\7\e76c6ed50d54da3769bf8cd3b8862056ca003971
-e
-5src/main/webapp/WEB-INF/templates/manager-header.html,d\0\d0d1e54e284ea71e2044b4c3160d91b606fc9c72
 k
 ;src/main/java/com/application/dto/CountryCreateRequest.java,8\5\85291dd91907e3c0279cb57d644d872abc38b38f
 j
@@ -69,10 +67,6 @@ _
 0src/main/java/com/application/model/Country.java,e\7\e74c1e408245c3227fa07d5bec7f54893cdb83e5
 ]
 -src/main/java/com/application/model/Role.java,6\9\696d10ad5b4b014a769d9d0da44dc2613f50c5fd
-m
-=src/main/webapp/WEB-INF/templates/hotel-list-for-country.html,7\8\782b4b686aac2e745fa82709f74ef3c148e14b41
-b
-2src/main/webapp/WEB-INF/templates/hotels-list.html,7\5\75276ceec33d510dbe25796feec3db39c4cc7c31
 ^
 .src/main/java/com/application/model/Hotel.java,c\9\c9112e333f67cd079d6ab5773606eb93f6474cb7
 h
@@ -117,8 +111,6 @@ q
 Asrc/main/java/com/application/dao/implementation/UserDAOImpl.java,4\2\42ffc986f71c1823ee5f74993b52cd291928de0f
 ]
 -src/main/webapp/WEB-INF/templates/header.html,6\1\61d5d0aeebd572f43596f56733462d73f937e655
-j
-:src/main/webapp/WEB-INF/templates/room-list-for-hotel.html,f\9\f97c2980308127520635abbe3e628fb0493cbd7b
 i
 9src/main/java/com/application/dto/HotelCreateRequest.java,c\4\c4b9e23360c5d8301e24151326d0297669e51873
 h
@@ -129,8 +121,6 @@ r
 Bsrc/main/java/com/application/dto/SearchAvailableRoomsRequest.java,4\6\4645964b27ae07cfe05f17288449e523cdfb76dc
 c
 3src/main/webapp/WEB-INF/templates/search-rooms.html,d\7\d7f0414f0780f8543bb48842ddba4f713b2664d2
-w
-Gsrc/main/webapp/WEB-INF/templates/rooms-list-available-for-booking.html,8\b\8be75b3c11acf0a57b00d63678ffecd4052525a2
 k
 ;src/main/java/com/application/security/UserDetailsImpl.java,c\8\c875c5c86d273d61e473f5003bfb7f9de6ffaaf5
 r
@@ -145,18 +135,12 @@ u
 Esrc/main/java/com/application/dto/mapper/UserCreateRequestMapper.java,4\c\4c50c323abb56b803add3dfe1e8b526c04a32928
 o
 ?src/main/java/com/application/service/impl/RoomServiceImpl.java,c\6\c61b5fa220ac99b8836c2b59ee435c019c896d73
-`
-0src/main/java/com/application/model/Booking.java,8\1\81864392c797e06f6e4105c6785ba00597e4804a
 i
 9src/main/java/com/application/dto/mapper/HotelMapper.java,8\2\82cd66d61e7ce84cccdcbef86a60c88276ce27a6
 k
 ;src/main/java/com/application/dto/mapper/BookingMapper.java,9\d\9da230c4d7bd4979d7f428667fba7c98c547285c
 k
 ;src/main/java/com/application/dto/mapper/CountryMapper.java,b\d\bd9822ee9c2acee91c9899bcfad04316cacad71c
-p
-@src/main/java/com/application/service/impl/HotelServiceImpl.java,e\d\edb33fa299328d0799cc7acf6bf850424af7fed9
-n
->src/main/java/com/application/service/impl/BookingService.java,0\a\0a24c8f6b639d361ab1b6895085cc0cd04606a28
 c
 3src/main/java/com/application/dto/UserResponse.java,3\c\3cf3993266fb561a1ed35cfaf079b6f1d9fc1794
 f

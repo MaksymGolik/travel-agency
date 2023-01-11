@@ -86,6 +86,8 @@
 
                                         <td><a th:href="@{/rooms/search_available}">Return to Searching</a></td>
 
+                                        <td><a th:href="@{/bookings/all/users/{id}(id=${bookingResponse.getGuest().getId()})}">Bookings</a></td>
+
 
 
                                     </div>

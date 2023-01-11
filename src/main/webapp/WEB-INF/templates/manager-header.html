@@ -18,6 +18,13 @@
                     <li sec:authorize="hasAuthority('MANAGER')">
                         <a class="nav-link active" aria-current="page" th:href="@{/hotels/create}">New Hotel</a>
                     </li>
+                    <li sec:authorize="hasAuthority('MANAGER')">
+                        <a class="nav-link active" aria-current="page" th:href="@{/rooms/create}">New Room</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('MANAGER')">
+                        <a class="nav-link active" aria-current="page" th:href="@{/bookings/all}">All Reservations</a>
+                    </li>
+
                 </ul>
             </div>
         </div>

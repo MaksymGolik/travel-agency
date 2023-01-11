@@ -30,7 +30,7 @@
             <td th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></td>
             <td th:text="${user.getEmail()}"/>
             <td><a th:href="@{/users/profile/{id}(id=${user.getId()})}">Profile</a></td>
-            <td><a th:href="@{/users/{id}/delete(id=${user.getId()})}">Bookings</a></td>
+            <td><a th:href="@{/bookings/all/users/{id}(id=${user.getId()})}">Bookings</a></td>
         </tr>
     </table>
 </div>

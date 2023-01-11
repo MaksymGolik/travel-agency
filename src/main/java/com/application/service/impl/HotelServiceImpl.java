@@ -90,8 +90,7 @@ public class HotelServiceImpl implements IHotelService {
 
         for (Room room: roomList) {
             if(room.getHotel().equals(hotel)){
-                /*this is not thrown*/
-                throw new CustomAccessDeniedException("You can not remove hotel: " + hotel.getName()  + " in country " +  hotel.getCountry().getName() + ". There are some bookings in this room." );
+                throw new CustomAccessDeniedException("You can not remove hotel: " + hotel.getName()  + " in country " +  hotel.getCountry().getName() + ". There are some bookings in this hotel." );
             }
         }
 

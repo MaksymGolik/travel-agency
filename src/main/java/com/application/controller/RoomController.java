@@ -74,7 +74,7 @@ public class RoomController {
         return "rooms-list";
     }
 
-
+    @PreAuthorize("hasAuthority('MANAGER')")
     @GetMapping("/{room_id}/update")
     public String update(Model model,
                          @PathVariable(name = "room_id") long roomId) {
@@ -83,7 +83,7 @@ public class RoomController {
         return "update-room";
     }
 
-
+    @PreAuthorize("hasAuthority('MANAGER')")
     @PostMapping("/{room_id}/update")
     public String update(@Valid @ModelAttribute("room") Room room,
                          @PathVariable(name = "room_id") long roomId,
@@ -103,7 +103,7 @@ public class RoomController {
     }
 
     @GetMapping("/{room_id}/delete")
-     // @PreAuthorize("hasAuthority('MANAGER')")
+      @PreAuthorize("hasAuthority('MANAGER')")
     public String delete(@PathVariable(value = "room_id") long roomId) {
 
         roomService.delete(roomId);

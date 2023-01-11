@@ -10,6 +10,7 @@ import com.application.service.IBookingService;
 import com.application.service.IRoomService;
 import com.application.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -87,7 +88,7 @@ public class BookingController {
 
 
     @GetMapping("/{booking_id}/delete")
-    // @PreAuthorize("hasAuthority('MANAGER')")
+
     public String delete(@PathVariable(value = "booking_id") long bookingId) {
 
         bookingService.delete(bookingId);
@@ -110,6 +111,14 @@ public class BookingController {
         model.addAttribute("bookings", bookingService.readAll().stream()
                 .map(BookingMapper::mapToDto).collect(Collectors.toList()));
         return "bookings-list";
+    }
+
+    @GetMapping("/all/users/{user_id}")
+    public String getAllForUser(Model model, @PathVariable(value = "user_id") long userId) {
+
+        model.addAttribute("bookings_user", bookingService.readByUserId(userId).stream()
+                .map(BookingMapper::mapToDto).collect(Collectors.toList()));
+        return "bookings-list-for-user";
     }
 
 

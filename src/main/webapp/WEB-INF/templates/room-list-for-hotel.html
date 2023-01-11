@@ -27,7 +27,7 @@
             <th>Price of the room per night</th>
             <th>Room Type</th>
             <th>Hotel</th>
-            <th colspan="2">Operations</th>
+            <th colspan="2" sec:authorize="hasAuthority('MANAGER')" >Operations</th>
         </tr>
         <tr th:each="room:${rooms}">
 
@@ -37,8 +37,9 @@
             <td th:text="${room.getPricePerRoom()}"/>
             <td th:text="${room.getRoomType()}"/>
             <td th:text="${room.getHotel().getName()}"/>
-            <td><a th:href="@{/rooms/{id}/update(id=${room.getId()})}">Update</a></td>
-            <td><a th:href="@{/rooms/{id}/delete(id=${room.getId()})}">Delete</a></td>
+
+            <td> <a sec:authorize="hasAuthority('MANAGER')" th:href="@{/rooms/{id}/update(id=${room.getId()})}">Update</a></td>
+            <td> <a sec:authorize="hasAuthority('MANAGER')"  th:href="@{/rooms/{id}/delete(id=${room.getId()})}">Delete</a></td>
 
 
         </tr>
