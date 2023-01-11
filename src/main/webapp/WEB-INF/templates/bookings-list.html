@@ -31,8 +31,8 @@
       <td th:text="${booking.getDateIn().toLocalDate()}"></td>
       <td th:text="${booking.getDateOut().toLocalDate()}"></td>
       <td th:text="${booking.getGuest().getId()}"/>
-      <td><a th:href="@{/users/profile/{id}(id=${booking.getId()})}">Profile</a></td>
-      <td><a th:href="@{/users/{id}/delete(id=${booking.getId()})}">Bookings</a></td>
+      <td><a th:href="@{/bookings/{id}(id=${booking.getId()})}">Booking info</a></td>
+      <td><a th:href="@{/bookings/{id}/delete(id=${booking.getId()})}">Remove</a></td>
     </tr>
   </table>
 </div>

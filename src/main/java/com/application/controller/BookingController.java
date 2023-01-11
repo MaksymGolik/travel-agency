@@ -2,9 +2,7 @@ package com.application.controller;
 
 import com.application.dto.BookingCreateRequest;
 import com.application.dto.BookingResponse;
-import com.application.dto.UserCreateRequest;
 import com.application.dto.mapper.BookingMapper;
-import com.application.dto.mapper.RoomMapper;
 import com.application.model.Booking;
 import com.application.model.Room;
 import com.application.model.User;
@@ -82,9 +80,10 @@ public class BookingController {
         BookingResponse bookingResponse = BookingMapper.mapToDto(new Booking(dateIn, dateOut, totalValue, user, roomsAvailableList));
         model.addAttribute("bookingResponse", bookingResponse);
 
-        return "bookings-info";
+        return "booking-info-for-new";
 
     }
+
 
 
     @GetMapping("/{booking_id}/delete")
@@ -92,9 +91,18 @@ public class BookingController {
     public String delete(@PathVariable(value = "booking_id") long bookingId) {
 
         bookingService.delete(bookingId);
-        return "bookings-list";
+        return "redirect:/bookings/all";
     }
 
+
+    @GetMapping("/{booking_id}")
+    public String get(Model model, @PathVariable(value = "booking_id") long bookingId) {
+
+        model.addAttribute("booking", bookingService.readById(bookingId));
+        model.addAttribute("bookings", bookingService.readAll().stream()
+                .map(BookingMapper::mapToDto).collect(Collectors.toList()));
+        return "booking-info-for-existing";
+    }
 
     @GetMapping("/all")
     public String getAll(Model model) {
