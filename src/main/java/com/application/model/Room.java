@@ -2,6 +2,7 @@ package com.application.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 
 import lombok.*;
 
@@ -19,9 +20,11 @@ public class Room {
     private long id;
 
 
-    @Column(name = "number_of_room", nullable = false, unique = true)
+    @Column(name = "number_of_room", nullable = false)
     private int numberOfRoom;
 
+
+    @Positive
     @Column(name = "people_capacity", nullable = false)
     private int peopleCapacity;
 

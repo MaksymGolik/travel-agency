@@ -59,8 +59,19 @@ public class RoomController {
         if (result.hasErrors()) {
             return "create-room";
         }
+
         Room room   = RoomMapper.mapToModel(roomCreateRequest);
         room.setHotel(hotelService.readByName(roomCreateRequest.getHotel()));
+
+         List<Room> listRoomsInHotel =  hotelService.readAllRoomsInHotel(roomCreateRequest.getHotel());
+
+         for (Room room1: listRoomsInHotel) {
+             if (room1.getNumberOfRoom() == room.getNumberOfRoom()) {
+                 throw new CustomAccessDeniedException("Room with number " + room.getNumberOfRoom() + " is already exist in hotel " + room.getHotel().getName());
+             }
+         }
+
+
         roomService.saveRoom(room);
         return "redirect:/rooms/all";
 
@@ -134,7 +145,7 @@ public class RoomController {
             throw new CustomAccessDeniedException("Date check in is after or is the same as date check out. Please, choose correct range of date. ");
         }
         if (dateIn.isBefore(LocalDateTime.now())) {
-            throw new CustomAccessDeniedException("Date check in is before now. You can not to reservation in the past. Please, choose correct range of date. ");
+            throw new CustomAccessDeniedException("Date check in is before now. You can not to do reservation in the past. Please, choose correct range of date. ");
         }
 
         if(!hotel.isEmpty() && !country.isEmpty()){

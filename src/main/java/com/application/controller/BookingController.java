@@ -56,6 +56,10 @@ public class BookingController {
         User user = userService.readByEmail(email);
 
         List<Room> roomsAvailableList = new ArrayList<>();
+        if(roomsAvailableList.size() == 0) {
+            return "empty-reservation";
+
+        }
         for (Long roomId : roomIdList) {
             roomsAvailableList.add(roomService.readById(roomId));
         }

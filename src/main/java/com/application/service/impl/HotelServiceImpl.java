@@ -105,6 +105,18 @@ public class HotelServiceImpl implements IHotelService {
     }
 
     @Override
+    public List<Room> readAllRoomsInHotel(String name) {
+        List<Room> roomList = roomDAO.findAll();
+        List<Room> listOfRoomsInHotel = new ArrayList<>();
+        for (Room room : roomList) {
+            if ( room.getHotel().getName().equals(name) ) {
+                listOfRoomsInHotel.add(room);
+            }
+        }
+        return listOfRoomsInHotel;
+    }
+
+    @Override
     public List<Room> readAllRoomsInHotel(long id) {
         List<Room> roomList = roomDAO.findAll();
         List<Room> listOfRoomsInHotel = new ArrayList<>();
@@ -115,4 +127,5 @@ public class HotelServiceImpl implements IHotelService {
         }
         return listOfRoomsInHotel;
     }
+
 }

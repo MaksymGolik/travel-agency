@@ -35,6 +35,16 @@ public class RoomDAOImpl implements IRoomDAO {
     }
 
     @Override
+    public Optional<Room> findRoomByNumberOfAndHotel(int numberOfRoom, Hotel hotel) {
+        long id = hotel.getId();
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select r from Room r where r.hotel.id=:id and r.numberOfRoom=:numberOfRoom", Room.class)
+                    .setParameter("numberOfRoom", numberOfRoom).getResultStream().findFirst();
+
+        }
+    }
+
+    @Override
     public void addRoomToTheHotel(Room room) {
         try(Session session = sessionFactory.openSession()){
             session.beginTransaction();

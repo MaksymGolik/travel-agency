@@ -1,6 +1,7 @@
 package com.application.dao;
 
 import com.application.model.Hotel;
+import com.application.model.Room;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,8 @@ public interface IHotelDAO {
     void update (Hotel hotel);
 
     List<Hotel> findAll();
+
+    List<Room> findAllRoomsInHotel(long id);
 
 
 }

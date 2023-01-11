@@ -3,6 +3,7 @@ package com.application.dao.implementation;
 
 import com.application.dao.IHotelDAO;
 import com.application.model.Hotel;
+import com.application.model.Room;
 import com.application.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -71,6 +72,16 @@ public class HotelDAOImpl implements IHotelDAO {
         try(Session session = sessionFactory.openSession()){
             return session.createQuery("select h from Hotel h", Hotel.class)
                     .getResultStream().collect(Collectors.toList());
+        }
+    }
+
+    @Override
+    public List<Room> findAllRoomsInHotel(long id) {
+
+        try(Session session = sessionFactory.openSession()){
+            return session.createQuery("select r from Room r where r.hotel.id=:id ", Room.class)
+                    .setParameter("id", id).getResultStream().collect(Collectors.toList());
+
         }
     }
 }

@@ -22,6 +22,8 @@ public interface IHotelService {
 
     List<Hotel> readAll();
 
+    List<Room> readAllRoomsInHotel(String name);
+
     List<Room> readAllRoomsInHotel(long id);
 
 
