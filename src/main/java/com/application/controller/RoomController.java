@@ -1,11 +1,9 @@
 package com.application.controller;
 
 import com.application.dto.BookingCreateRequest;
-import com.application.dto.RoomResponse;
 import com.application.dto.SearchAvailableRoomsRequest;
 import com.application.dto.RoomCreateRequest;
 import com.application.dto.mapper.RoomMapper;
-import com.application.exception.CustomAccessDeniedException;
 import com.application.model.Room;
 import com.application.service.ICountryService;
 import com.application.service.IHotelService;
@@ -22,7 +20,6 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -67,7 +64,7 @@ public class RoomController {
 
          for (Room room1: listRoomsInHotel) {
              if (room1.getNumberOfRoom() == room.getNumberOfRoom()) {
-                 throw new CustomAccessDeniedException("Room with number " + room.getNumberOfRoom() + " is already exist in hotel " + room.getHotel().getName());
+                 throw new IllegalArgumentException("Room with number " + room.getNumberOfRoom() + " is already exist in hotel " + room.getHotel().getName());
              }
          }
 
@@ -142,10 +139,10 @@ public class RoomController {
         String hotel = searchAvailableRoomsRequest.getHotelName();
 
         if (dateIn.isAfter(dateOut) ) {
-            throw new CustomAccessDeniedException("Date check in is after or is the same as date check out. Please, choose correct range of date. ");
+            throw new IllegalArgumentException("Date check in is after or is the same as date check out. Please, choose correct range of date. ");
         }
         if (dateIn.isBefore(LocalDateTime.now())) {
-            throw new CustomAccessDeniedException("Date check in is before now. You can not to do reservation in the past. Please, choose correct range of date. ");
+            throw new IllegalArgumentException("Date check in is before now. You can not to do reservation in the past. Please, choose correct range of date. ");
         }
 
         if(!hotel.isEmpty() && !country.isEmpty()){
@@ -154,9 +151,6 @@ public class RoomController {
             rooms = roomService.findAvailableByCountryPeriod(country,dateIn,dateOut);
         } else rooms = roomService.findAvailableByPeriod(dateIn,dateOut);
 
-        // TODO
-
-     //   Map<RoomResponse,List<Long>> catalog = RoomMapper.mapToRoomCatalog(rooms);
 
         model.addAttribute("rooms", rooms.stream().map(RoomMapper::mapToDto).collect(Collectors.toList()));
         BookingCreateRequest booking = new BookingCreateRequest();

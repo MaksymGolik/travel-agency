@@ -11,18 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CustomAccessDeniedHandler  implements AccessDeniedHandler {
-
-    @ExceptionHandler(CustomAccessDeniedException.class)
-
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException ade) throws IOException, ServletException {
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.html");
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        request.setAttribute("code","403 / Forbidden");
-        request.setAttribute("info", ade.getMessage());
-        requestDispatcher.forward(request, response);
-
+        response.sendRedirect("/users/denied");
     }
 }

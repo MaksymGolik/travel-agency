@@ -59,6 +59,7 @@ public class UserController {
         return "redirect:/users/login";
     }
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @GetMapping("/all")
     public String all(Model model){
         model.addAttribute("users", userService.readAll().stream()
@@ -71,5 +72,10 @@ public class UserController {
     public String profile(@PathVariable long id, Model model){
         model.addAttribute(UserResponseMapper.mapToDto(userService.readById(id)));
         return "user-info";
+    }
+
+    @GetMapping("/denied")
+    public String profile(){
+        return "access-denied";
     }
 }

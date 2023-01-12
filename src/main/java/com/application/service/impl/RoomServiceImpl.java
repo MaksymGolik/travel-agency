@@ -1,13 +1,9 @@
 package com.application.service.impl;
 
 import com.application.dao.IBookingDAO;
-import com.application.dao.IHotelDAO;
 import com.application.dao.IRoomDAO;
-import com.application.exception.CustomAccessDeniedException;
-import com.application.exception.CustomAccessDeniedHandler;
 import com.application.exception.EntityNotFoundException;
 import com.application.model.Booking;
-import com.application.model.Hotel;
 import com.application.model.Room;
 import com.application.service.IRoomService;
 import lombok.extern.slf4j.Slf4j;
@@ -79,7 +75,7 @@ public class RoomServiceImpl implements IRoomService {
          for (Booking booking: bookingList) {
             if(booking.getRooms().contains(room)){
                 /*this is not thrown*/
-                throw new CustomAccessDeniedException("You can not remove room: " + room.getNumberOfRoom() + " in hotel " + room.getHotel().getName() + ". There are some bookings in this room." );
+                throw new IllegalArgumentException("You can not remove room: " + room.getNumberOfRoom() + " in hotel " + room.getHotel().getName() + ". There are some bookings in this room." );
             }
 
         }

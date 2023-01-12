@@ -2,9 +2,7 @@ package com.application.service.impl;
 
 import com.application.dao.IHotelDAO;
 import com.application.dao.IRoomDAO;
-import com.application.exception.CustomAccessDeniedException;
 import com.application.exception.EntityNotFoundException;
-import com.application.model.Booking;
 import com.application.model.Hotel;
 import com.application.model.Room;
 import com.application.service.IHotelService;
@@ -90,7 +88,7 @@ public class HotelServiceImpl implements IHotelService {
 
         for (Room room: roomList) {
             if(room.getHotel().equals(hotel)){
-                throw new CustomAccessDeniedException("You can not remove hotel: " + hotel.getName()  + " in country " +  hotel.getCountry().getName() + ". There are some bookings in this hotel." );
+                throw new IllegalArgumentException("You can not remove hotel: " + hotel.getName()  + " in country " +  hotel.getCountry().getName() + ". There are some bookings in this hotel." );
             }
         }
 
