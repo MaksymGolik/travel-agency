@@ -48,7 +48,7 @@ public class BookingController {
     public String create(@ModelAttribute("booking") BookingCreateRequest bookingCreateRequest,
                          Principal principal, Model model, BindingResult result) {
         List<Long> roomIdList = bookingCreateRequest.getRoomIdList();
-        if (roomIdList.size() == 0) {
+        if (roomIdList.isEmpty()) {
             return "empty-reservation";
 
         }
