@@ -88,6 +88,7 @@ public class BookingController {
     }
 
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @GetMapping("/{booking_id}/delete")
 
     public String delete(@PathVariable(value = "booking_id") long bookingId) {
@@ -106,6 +107,9 @@ public class BookingController {
 
 
 
+
+    @PreAuthorize("hasAuthority('MANAGER') " +
+            "or authentication.principal.id==@bookingServiceImpl.readById(#bookingId).user.id")
     @GetMapping("/{booking_id}")
     public String get(Model model, @PathVariable(value = "booking_id") long bookingId) {
 
@@ -115,6 +119,7 @@ public class BookingController {
         return "booking-info-for-existing";
     }
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @GetMapping("/all")
     public String getAll(Model model) {
 
@@ -123,6 +128,7 @@ public class BookingController {
         return "bookings-list";
     }
 
+    @PreAuthorize("hasAuthority('MANAGER') or #userId==authentication.principal.id")
     @GetMapping("/all/users/{user_id}")
     public String getAllForUser(Model model, @PathVariable(value = "user_id") long userId) {
 
