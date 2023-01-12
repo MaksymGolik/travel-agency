@@ -1,20 +1,10 @@
 package com.application.dto.mapper;
 
-import com.application.dao.ICountryDAO;
 import com.application.dto.HotelCreateRequest;
 import com.application.dto.HotelResponse;
 import com.application.model.Hotel;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class HotelMapper {
-
-
-  /*  ICountryDAO iCountryDAO;
-
-    @Autowired
-    public HotelMapper(ICountryDAO iCountryDAO) {
-        this.iCountryDAO = iCountryDAO;
-    }*/
 
     public static Hotel mapToModel(HotelCreateRequest hotelCreateRequest){
         return Hotel.builder()
