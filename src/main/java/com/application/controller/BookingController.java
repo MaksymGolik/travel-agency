@@ -95,6 +95,15 @@ public class BookingController {
         bookingService.delete(bookingId);
         return "redirect:/bookings/all";
     }
+    @GetMapping("/{booking_id}/delete/user/{user_id}")
+
+    public String deleteForUser(@PathVariable(value = "booking_id") long bookingId,
+                                @PathVariable(value = "user_id") long userId) {
+
+        bookingService.delete(bookingId);
+        return "redirect:/bookings/all/users/{user_id}";
+    }
+
 
 
     @GetMapping("/{booking_id}")
