@@ -13,8 +13,6 @@ V
 &src/main/webapp/resources/css/auth.css,a\5\a5d0a479f5a62e5b45cbe1151b36929ac251eeb5
 k
 ;src/main/java/com/application/config/WebSecurityConfig.java,4\b\4ba136fee2757c8939f66a6ebd64ab9dbe4b43d2
-O
-src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
 f
 6src/main/java/com/application/config/WebMvcConfig.java,c\1\c120721e3c649acea9378aa9bc7aa8270756e83f
 g
@@ -81,3 +79,5 @@ c
 3src/main/java/com/application/dto/UserResponse.java,3\c\3cf3993266fb561a1ed35cfaf079b6f1d9fc1794
 f
 6src/main/java/com/application/dto/BookingResponse.java,6\7\675ae625c7d3fbaa03656e9d2b8d496564d12490
+b
+2src/main/webapp/WEB-INF/templates/create-room.html,b\3\b3de492877b887372da5152c4721d2b75f06b714

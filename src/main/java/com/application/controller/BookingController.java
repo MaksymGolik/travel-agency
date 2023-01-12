@@ -48,7 +48,10 @@ public class BookingController {
     public String create(@ModelAttribute("booking") BookingCreateRequest bookingCreateRequest,
                          Principal principal, Model model, BindingResult result) {
         List<Long> roomIdList = bookingCreateRequest.getRoomIdList();
+        if (roomIdList.size() == 0) {
+            return "empty-reservation";
 
+        }
         LocalDateTime dateIn = bookingCreateRequest.getDateIn();
         LocalDateTime dateOut = bookingCreateRequest.getDateOut();
 
@@ -56,21 +59,16 @@ public class BookingController {
         User user = userService.readByEmail(email);
 
         List<Room> roomsAvailableList = new ArrayList<>();
-        if(roomsAvailableList.size() == 0) {
-            return "empty-reservation";
 
-        }
         for (Long roomId : roomIdList) {
             roomsAvailableList.add(roomService.readById(roomId));
         }
 
 
-
         int differenceOfYears = dateOut.getYear() - dateIn.getYear();
         int dayIn = dateIn.getDayOfYear();
-        int dayOut = dateOut.getDayOfYear() + differenceOfYears*365;
-        int numberOfBookingDay  = dayOut - dayIn;
-
+        int dayOut = dateOut.getDayOfYear() + differenceOfYears * 365;
+        int numberOfBookingDay = dayOut - dayIn;
 
 
         double valueOfAllAvailableRoomsPerNight = 0;
@@ -88,7 +86,6 @@ public class BookingController {
         return "booking-info-for-new";
 
     }
-
 
 
     @GetMapping("/{booking_id}/delete")
